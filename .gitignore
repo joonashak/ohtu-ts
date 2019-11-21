@@ -1,3 +1,4 @@
 .gradle
 build
 .vscode
+!src/main/resources/db/migration/*.sql
