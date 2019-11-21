@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'jacoco'
+    id 'checkstyle'
 }
 
 repositories {
@@ -39,4 +40,8 @@ jacocoTestReport {
         xml.enabled true
         html.enabled true
     }
+}
+
+checkstyle {
+    toolVersion '8.26';
 }
