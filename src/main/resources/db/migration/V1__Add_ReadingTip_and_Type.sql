@@ -3,9 +3,10 @@ CREATE TABLE Type (
   name TEXT
 );
 
-INSERT INTO Type (name)
+INSERT INTO Type (id, name)
 VALUES (
-  "Book"
+  1,
+  "Kirja"
 );
 
 CREATE TABLE ReadingTip (
