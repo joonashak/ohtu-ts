@@ -6,15 +6,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.flywaydb.core.Flyway;
 
+/**
+ * Provides database connection and automatic migration.
+ * @author Joonas Häkkinen
+ */
 public class Database {
-    Connection conn;
     // Path to sqlite database file.
     String path = System.getProperty("user.home").concat("/.ohtu-ts/");
-    // Filename for database.
+    // Filename for database (with path).
     String dbFile = path.concat("main.db");
 
     /**
-     * Initialize a connection to the database.
+     * Initialize the database and run migrations.
      */
     public Database() {
         // Create asset directory if necessary.
@@ -24,12 +27,19 @@ public class Database {
         // Run database migrations first.
         Flyway fw = Flyway.configure().dataSource("jdbc:sqlite:" + dbFile, null, null).load();
         fw.migrate();
+    }
 
-        // Connect to the database.
+    /**
+     * Connect to database.
+     * @return Database Connection object.
+     */
+    public Connection connect() {
+        Connection conn = null;
+
         try {
-            this.conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+            conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
 
-            if (this.conn == null) {
+            if (conn == null) {
                 System.out.println("*** ERROR while connecting to database. Program will quit.");
                 System.exit(1);
             }
@@ -37,25 +47,7 @@ public class Database {
             System.out.println(e.getMessage());
             System.exit(1);
         }
-    }
 
-    /**
-     * Get database Connection object to interface with the db.
-     * @return Database Connection object.
-     */
-    public Connection getConnection() {
-        return this.conn;
-    }
-
-    /**
-     * Close this Database connection.
-     */
-    public void close() {
-        try {
-            this.conn.close();
-        } catch (Exception e) {
-            System.out.println("*** ERROR while closing database connection.");
-            System.exit(1);
-        }
+        return conn;
     }
 }
