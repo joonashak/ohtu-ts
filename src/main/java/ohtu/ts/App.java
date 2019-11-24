@@ -11,32 +11,33 @@ import ohtu.ts.domain.ReadingTip;
 import ohtu.ts.domain.Type;
 import ohtu.ts.domain.Types;
 import ohtu.ts.io.ConsoleIO;
+import ohtu.ts.io.IO;
 import ohtu.ts.services.ReadingTipService;
 
 public class App {
     
-    private ConsoleIO io;
+    private IO io;
     private ReadingTipService rtService;
     
-    public App(ConsoleIO io, ReadingTipService rtService) {
+    public App(IO io, ReadingTipService rtService) {
         this.io = io;
         this.rtService = rtService;
     }
     
     
-    public String askCommand(ConsoleIO io) {
+    public String askCommand(IO io) {
         String command = io.ReadLine("Valitse komento: lisää");
         return command;
     }
         
     
-    public String askType(ConsoleIO io) {
+    public String askType(IO io) {
         String type = io.ReadLine("Valitse lukuvinkin tyyppi: Kirja");
         return type;
     }
     
     
-    public Book askBookDetails(ConsoleIO io) {
+    public Book askBookDetails(IO io) {
         String author = io.ReadLine("kirjailija: ");
         String isbn = io.ReadLine("isbn: ");
         String title = io.ReadLine("otsikko: ");       
