@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * @author ida
  */
 public class Stepdefs {
-    
+
     
     @Given("command {string} is selected")
     public void CommandIsSelected(String command) {
@@ -21,7 +21,7 @@ public class Stepdefs {
     
     @When("type {string} is given")
     public void typeIsGiven(String type) {
-        
+
     }
 
 
@@ -31,7 +31,7 @@ public class Stepdefs {
     }
 
 
-    @Then("new reading tip is added")
+    @Then("Lukuvinkki lisätty: {string}")
     public void newReadingTipIsAdded() {
         
     }

@@ -15,6 +15,14 @@ import ohtu.ts.services.ReadingTipService;
 
 public class App {
     
+    private ConsoleIO io;
+    private ReadingTipService rtService;
+    
+    public App(ConsoleIO io, ReadingTipService rtService) {
+        this.io = io;
+        this.rtService = rtService;
+    }
+    
     
     public String askCommand(ConsoleIO io) {
         String command = io.ReadLine("Valitse komento: lisää");
@@ -39,8 +47,6 @@ public class App {
 
     
     public void run() {
-        ReadingTipService rtService = new ReadingTipService();
-        ConsoleIO io = new ConsoleIO();
         String command = askCommand(io);
         
         if (command.equals("lisää")) {
@@ -62,7 +68,7 @@ public class App {
 
     public static void main(String[] args) {
         
-        new App().run();
+        new App(new ConsoleIO(), new ReadingTipService()).run();
         /*        
         Database db = new Database();
         try {
