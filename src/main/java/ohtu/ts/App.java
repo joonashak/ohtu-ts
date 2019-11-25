@@ -26,21 +26,21 @@ public class App {
     
     
     public String askCommand(IO io) {
-        String command = io.ReadLine("Valitse komento: lisää");
+        String command = io.readLine("Valitse komento: lisää");
         return command;
     }
         
     
     public String askType(IO io) {
-        String type = io.ReadLine("Valitse lukuvinkin tyyppi: Kirja");
+        String type = io.readLine("Valitse lukuvinkin tyyppi: Kirja");
         return type;
     }
     
     
     public Book askBookDetails(IO io) {
-        String author = io.ReadLine("kirjailija: ");
-        String isbn = io.ReadLine("isbn: ");
-        String title = io.ReadLine("otsikko: ");       
+        String author = io.readLine("kirjailija: ");
+        String isbn = io.readLine("isbn: ");
+        String title = io.readLine("otsikko: ");       
         Book book = new Book(1, title, author, isbn);
         return book;
     }

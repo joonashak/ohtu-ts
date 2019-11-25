@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class ConsoleIO implements IO {
     private Scanner scanner = new Scanner(System.in);
     
+    @Override
     public void print(String text) {
         System.out.println(text);
     }
@@ -18,7 +19,8 @@ public class ConsoleIO implements IO {
         return Integer.parseInt(scanner.nextLine());
     }
     
-    public String ReadLine(String text) {
+    @Override
+    public String readLine(String text) {
         System.out.println(text);
         return scanner.nextLine();
     }

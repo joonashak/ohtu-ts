@@ -13,9 +13,9 @@ public class Book extends ReadingTip {
     @Override
     public String toString() {
         return new StringBuilder()
-            .append("Tyyppi: Kirja")
-            .append(String.format("Otsikko: %s", title))
-            .append(String.format("Kirjoittaja: %s", author))
+            .append("Tyyppi: Kirja, ")
+            .append(String.format("Otsikko: %s, ", title))
+            .append(String.format("Kirjoittaja: %s, ", author))
             .append(String.format("ISBN: %s", isbn))
             .toString();
     }

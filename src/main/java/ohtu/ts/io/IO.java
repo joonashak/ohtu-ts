@@ -7,5 +7,5 @@ package ohtu.ts.io;
  */
 public interface IO {
     void print(String text);
-    String ReadLine(String text);
+    String readLine(String text);
 }

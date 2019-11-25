@@ -11,22 +11,25 @@ public class StubIO implements IO {
 
     private List<String> inputs;
     private int i;
-    private ArrayList<String> outputs;
+    private List<String> outputs;
 
     public StubIO(List<String> inputs) {
+        this.i = 0;
         this.inputs = inputs;
         this.outputs = new ArrayList<>();
     }
 
+    @Override
     public void print(String text) {
         outputs.add(text);
     }
 
-    public ArrayList<String> getOutputs() {
+    public List<String> getOutputs() {
         return outputs;
     }
 
-    public String ReadLine(String text) {
+    @Override
+    public String readLine(String text) {
         print(text);
         return inputs.get(i++);
     }
