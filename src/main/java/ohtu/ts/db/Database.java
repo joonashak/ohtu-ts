@@ -11,15 +11,19 @@ import org.flywaydb.core.Flyway;
  * @author Joonas Häkkinen
  */
 public class Database {
-    // Path to sqlite database file.
-    String path = System.getProperty("user.home").concat("/.ohtu-ts/");
-    // Filename for database (with path).
-    String dbFile = path.concat("main.db");
+    
+    private String path;
+    private String dbFile;
+    private File dir;  
 
     /**
      * Initialize the database and run migrations.
      */
-    public Database() {
+    public Database(String database) {
+        // Path to sqlite database file.
+        path = System.getProperty("user.home").concat("/.ohtu-ts/");
+        // Filename for database (with path)
+        dbFile = path.concat(database);
         // Create asset directory if necessary.
         File dir = new File(path);
         dir.mkdir();
@@ -28,7 +32,11 @@ public class Database {
         Flyway fw = Flyway.configure().dataSource("jdbc:sqlite:" + dbFile, null, null).load();
         fw.migrate();
     }
-
+    
+    public String getdbFile() {
+        return dbFile;
+    }
+    
     /**
      * Connect to database.
      * @return Database Connection object.
