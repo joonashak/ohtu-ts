@@ -17,7 +17,7 @@ public class ReadingTipService {
       
     
     public ReadingTipService() {
-        db = new Database("main.db");
+        db = new Database();
         try {
             rtDao = new ReadingTipDao(db);
         } catch (SQLException e) {

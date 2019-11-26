@@ -13,6 +13,7 @@ import ohtu.ts.domain.Types;
 import ohtu.ts.io.ConsoleIO;
 import ohtu.ts.io.IO;
 import ohtu.ts.services.ReadingTipService;
+import ohtu.ts.utils.Configuration;
 
 public class App {
     
@@ -64,13 +65,12 @@ public class App {
         
         
     }
-              
-    
 
     public static void main(String[] args) {
         
         new App(new ConsoleIO(), new ReadingTipService()).run();
-        /*        
+
+        /*
         Database db = new Database();
         try {
             // Test getting reading tip types.
@@ -96,6 +96,5 @@ public class App {
             System.out.println(e);
         }
         */
-        
     }
 }

@@ -6,37 +6,38 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.flywaydb.core.Flyway;
 
+import ohtu.ts.utils.Configuration;
+
 /**
  * Provides database connection and automatic migration.
  * @author Joonas Häkkinen
  */
 public class Database {
-    
-    private String path;
-    private String dbFile;
-    private File dir;  
+    // Path to sqlite database file.
+    String path = System.getProperty("user.home").concat("/.ohtu-ts/");
+    // Filename for database (with path).
+    Configuration config = new Configuration();
+    String dbFile = config.getDbFile();
+
+    // Connection string for database driver.
+    String connStr = new StringBuilder("jdbc:sqlite:")
+            .append(path)
+            .append(dbFile)
+            .toString();
 
     /**
      * Initialize the database and run migrations.
      */
-    public Database(String database) {
-        // Path to sqlite database file.
-        path = System.getProperty("user.home").concat("/.ohtu-ts/");
-        // Filename for database (with path)
-        dbFile = path.concat(database);
+    public Database() {
         // Create asset directory if necessary.
         File dir = new File(path);
         dir.mkdir();
 
         // Run database migrations first.
-        Flyway fw = Flyway.configure().dataSource("jdbc:sqlite:" + dbFile, null, null).load();
+        Flyway fw = Flyway.configure().dataSource(connStr, null, null).load();
         fw.migrate();
     }
-    
-    public String getdbFile() {
-        return dbFile;
-    }
-    
+
     /**
      * Connect to database.
      * @return Database Connection object.
@@ -45,7 +46,7 @@ public class Database {
         Connection conn = null;
 
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+            conn = DriverManager.getConnection(connStr);
 
             if (conn == null) {
                 System.out.println("*** ERROR while connecting to database. Program will quit.");
