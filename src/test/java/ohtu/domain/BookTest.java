@@ -1,4 +1,3 @@
-
 package ohtu.domain;
 
 import ohtu.ts.domain.Book;
@@ -12,7 +11,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author joonas
+ * @author Joonas Alanenpää
  */
 public class BookTest {
 
@@ -23,22 +22,22 @@ public class BookTest {
     public void setUp() {
         book = new Book(1, "Koodauksen alkeet", "Mikko Mallikas", "978-232324234");
         bookString = new StringBuilder()
-            .append("Tyyppi: Kirja, ")
-            .append(String.format("Otsikko: %s, ", "Koodauksen alkeet"))
-            .append(String.format("Kirjoittaja: %s, ", "Mikko Mallikas"))
-            .append(String.format("ISBN: %s", "978-232324234")).toString();
+                .append("Tyyppi: Kirja, ")
+                .append(String.format("Otsikko: %s, ", "Koodauksen alkeet"))
+                .append(String.format("Kirjoittaja: %s, ", "Mikko Mallikas"))
+                .append(String.format("ISBN: %s", "978-232324234")).toString();
     }
-    
+
     @Test
     public void bookShouldBeCreated() {
         assertEquals("Mikko Mallikas", book.getAuthor());
         assertEquals("Koodauksen alkeet", book.getTitle());
         assertEquals("978-232324234", book.getIsbn());
+        assertEquals(book.getType(), Types.BOOK);
     }
-    
+
     @Test
     public void bookToStringIsWorking() {
-        
         assertEquals(book.toString(), bookString);
     }
 }
