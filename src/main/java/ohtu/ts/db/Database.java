@@ -10,14 +10,29 @@ import ohtu.ts.utils.Configuration;
 
 /**
  * Provides database connection and automatic migration.
+ *
  * @author Joonas Häkkinen
  */
 public class Database {
+
+    //// TOGGLE ME
+    public static boolean TESTING;
+
+    public static final String TESTING_DB;
+
+    static {
+        setTesting(true);
+        TESTING_DB = "testDbFile.db";
+    }
+
     // Path to sqlite database file.
     String path = System.getProperty("user.home").concat("/.ohtu-ts/");
+
     // Filename for database (with path).
     Configuration config = new Configuration();
-    String dbFile = config.getDbFile();
+
+    // Use TESTING toggle to manage database file:
+    String dbFile = TESTING ? TESTING_DB : config.getDbFile();
 
     // Connection string for database driver.
     String connStr = new StringBuilder("jdbc:sqlite:")
@@ -40,6 +55,7 @@ public class Database {
 
     /**
      * Connect to database.
+     *
      * @return Database Connection object.
      */
     public Connection connect() {
@@ -58,5 +74,9 @@ public class Database {
         }
 
         return conn;
+    }
+
+    public static void setTesting(boolean value) {
+        TESTING = value;
     }
 }
