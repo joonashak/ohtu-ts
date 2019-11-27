@@ -31,6 +31,21 @@ public class StubIO implements IO {
     @Override
     public String readLine(String text) {
         print(text);
-        return inputs.get(i++);
+        if (i < inputs.size()) {
+            return inputs.get(i++);
+        }
+        return "";
+    }
+    
+    public String getOutputAt(int i) {
+        if (i < 0) {
+            return "out of boundaries";
+        } else {
+            return outputs.get(i);
+        }
+    }
+    
+    public int lastOutputIndex() {
+        return outputs.size() - 1;
     }
 }
