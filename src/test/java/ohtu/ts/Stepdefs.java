@@ -9,7 +9,7 @@ import ohtu.ts.io.StubIO;
 import ohtu.ts.services.ReadingTipService;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.Before;
+import ui.TextUI;
 
 /**
  *
@@ -19,7 +19,7 @@ public class Stepdefs {
 
     private List<String> commands = new ArrayList<>();
     private StubIO io = new StubIO(commands);
-    private App app = new App(io, new ReadingTipService());
+    private TextUI app = new TextUI(io, new ReadingTipService());
 
     @Given("command {string} is selected")
     public void CommandIsSelected(String command) {

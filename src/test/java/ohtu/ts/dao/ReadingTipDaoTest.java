@@ -6,46 +6,44 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import static ohtu.ts.dao.Dao.closeAll;
 import ohtu.ts.db.Database;
+import ohtu.ts.utils.Configuration;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author ida
  */
 public class ReadingTipDaoTest {
-    
+
+    private Configuration configuration;
     private ReadingTipDao readingTipDao;
     private Database db;
-    
+
     public ReadingTipDaoTest() {
     }
 
     @Before
     public void setUp() {
-        
-        
-        db = new Database("ReadingTipTest.db");
-        
+
+        configuration = new Configuration();
+        db = new Database();
+
         try {
             readingTipDao = new ReadingTipDao(db);
         } catch (SQLException e) {
             System.out.println("error");
             System.out.println(e);
         }
-        
+
         try {
             Connection conn = db.connect();
             String sql = new StringBuilder()
-                .append("INSERT INTO ReadingTip")
-                .append("(type_id, title, author, isbn)")
-                .append("VALUES (?,?,?,?)")
-                .toString();
-            
+                    .append("INSERT INTO ReadingTip")
+                    .append("(type_id, title, author, isbn)")
+                    .append("VALUES (?,?,?,?)")
+                    .toString();
+
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, 1); //Type 1 = Kirja
             stmt.setString(2, "kirjan nimi");
@@ -54,19 +52,16 @@ public class ReadingTipDaoTest {
 
             stmt.executeUpdate();
             closeAll(stmt, conn);
-            
+
         } catch (Exception e) {
             throw new AbstractMethodError("Error in inserting book into db: " + e.getMessage());
         }
     }
-    
-    
-    
-    
+
     @After
     public void tearDown() {
         //delete database file
-        File dbFile = new File(db.getdbFile());
+        File dbFile = new File(configuration.getDbFile());
         dbFile.delete();
     }
 
