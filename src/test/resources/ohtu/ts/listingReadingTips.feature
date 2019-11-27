@@ -1,5 +1,6 @@
 Feature: As a user I want to be able to list all reading tips
 
+
 Scenario: user can list all reading tips
     Given command "lisää" is selected
     And type "Kirja" is given
@@ -10,3 +11,9 @@ Scenario: user can list all reading tips
     When command "listaa" is selected
     Then system will respond first with "Tyyppi: Kirja, Otsikko: title1, Kirjoittaja: author1, ISBN: isbn-1"
     And system will respond second with "Tyyppi: Kirja, Otsikko: title2, Kirjoittaja: author2, ISBN: isbn-2"
+
+  Scenario: user can list all reading tips
+    Given command "listaa" is selected
+    When no filters have been set
+    Then system will respond by outputting a list of all the reading tips
+
