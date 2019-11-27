@@ -15,7 +15,8 @@ dependencies {
     implementation 'org.flywaydb:flyway-core:6.0.8'
     testImplementation 'junit:junit:4.12'
     testImplementation 'io.cucumber:cucumber-java:4.7.4'
-    testImplementation 'io.cucumber:cucumber-junit:4.7.4'    
+    testImplementation 'io.cucumber:cucumber-junit:4.7.4'   
+    testImplementation 'org.mockito:mockito-core:3.1.0'
 }
 
 application {

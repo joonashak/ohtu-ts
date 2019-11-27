@@ -27,7 +27,7 @@ public class App {
     
     
     public String askCommand(IO io) {
-        String command = io.readLine("Valitse komento: lisää");
+        String command = io.readLine("Valitse komento: lisää, listaa");
         return command;
     }
         
@@ -60,6 +60,11 @@ public class App {
                 io.print("Lukuvinkki lisätty: " + book.toString());
             }
             
+        } else if (command.equals("listaa")) {
+            List<ReadingTip> tips = rtService.listTips();
+            for (ReadingTip tip : tips) {
+                io.print(tip.toString());
+            }
         }
 
         

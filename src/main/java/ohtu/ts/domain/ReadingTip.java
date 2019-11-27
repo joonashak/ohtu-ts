@@ -66,4 +66,13 @@ public class ReadingTip {
     public void setType(Types type) {
         this.type = type;
     }
+    
+    public String toString() {
+        return new StringBuilder()
+            .append("Tyyppi: Kirja, ")
+            .append(String.format("Otsikko: %s, ", title))
+            .append(String.format("Kirjoittaja: %s, ", author))
+            .append(String.format("ISBN: %s", isbn))
+            .toString();
+    }
 }
