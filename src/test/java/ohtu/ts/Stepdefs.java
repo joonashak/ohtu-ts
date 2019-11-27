@@ -19,7 +19,7 @@ public class Stepdefs {
 
     private List<String> commands = new ArrayList<>();
     private StubIO io = new StubIO(commands);
-    private TextUI app = new TextUI(io, new ReadingTipService());
+    private TextUI ui = new TextUI(io, new ReadingTipService());
 
     @Given("command {string} is selected")
     public void CommandIsSelected(String command) {
@@ -40,7 +40,8 @@ public class Stepdefs {
 
     @Then("system will respond with Lukuvinkki lisätty: {string}")
     public void systemWillRespondWithLukuvinkkiLisätty(String string) {
-        app.run();
+        commands.add("lopeta");
+        ui.run();
         // The sixth thing that this program prints:
         String printout = io.getOutputs().get(5);
         assertThat(printout,
