@@ -6,12 +6,6 @@
 
 ## Usage
 
-### Run application
-
-```bash
-gradle run
-```
-
 ### Run unit tests
 
 ```bash
@@ -33,3 +27,5 @@ gradle cucumber
 ## Documentation
 
 [Sprint backlog](https://docs.google.com/spreadsheets/d/1Ac3qACtyknZ2TekVcMgAAftpzhx3A5oApzwwDwFgvnk/edit#gid=7)
+
+[User manual](https://github.com/joonashak/ohtu-ts/docs/user_manual.md)

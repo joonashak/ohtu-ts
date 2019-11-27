@@ -22,6 +22,7 @@ public class TextUI {
     private final IO io;
     private final ReadingTipService rtService;
 
+    ////  Commands:
     private static final String COM_ADD = "lisää";
     private static final String COM_LIST = "listaa";
     private static final String COM_EXIT = "lopeta";
