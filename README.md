@@ -29,3 +29,5 @@ gradle cucumber
 [Sprint backlog](https://docs.google.com/spreadsheets/d/1Ac3qACtyknZ2TekVcMgAAftpzhx3A5oApzwwDwFgvnk/edit#gid=7)
 
 [User manual](https://github.com/joonashak/ohtu-ts/docs/user_manual.md)
+
+[Definition of done](https://github.com/joonashak/ohtu-ts/docs/definition_of_done.md)

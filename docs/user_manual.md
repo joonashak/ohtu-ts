@@ -1,6 +1,6 @@
 # User manual
 
-This is a short documentation on how to run the reading tips program on . First, ensure that you have a working Java installation. Using a typical Linux installation, traverse to the project folder and execute the supplied gradlew-script using the command
+This is a short documentation on how to run the __Reading tips program__. First, ensure that you have a working Java installation. Using a typical Linux installation, traverse to the project folder and execute the supplied gradlew-script using the command
 
 ```bash
 ./gradlew run 
