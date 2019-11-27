@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import ohtu.ts.io.StubIO;
 import ohtu.ts.services.ReadingTipService;
+import ohtu.ts.ui.TextUI;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import ui.TextUI;
 
 /**
  *

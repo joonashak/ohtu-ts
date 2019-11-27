@@ -2,7 +2,7 @@ package ohtu.ts;
 
 import ohtu.ts.io.ConsoleIO;
 import ohtu.ts.services.ReadingTipService;
-import ui.TextUI;
+import ohtu.ts.ui.TextUI;
 
 public class App {
 
