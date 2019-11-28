@@ -14,14 +14,15 @@ public class ConsoleIO implements IO {
         System.out.println(text);
     }
     
-    public int ReadInt(String val) {
-        System.out.println(val);
+    @Override
+    public int readInt(String val) {
+        System.out.print(val);
         return Integer.parseInt(scanner.nextLine());
     }
     
     @Override
     public String readLine(String text) {
-        System.out.println(text);
+        System.out.print(text);
         return scanner.nextLine();
     }
     

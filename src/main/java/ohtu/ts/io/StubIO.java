@@ -48,4 +48,10 @@ public class StubIO implements IO {
     public int lastOutputIndex() {
         return outputs.size() - 1;
     }
+
+    @Override
+    public int readInt(String text) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }

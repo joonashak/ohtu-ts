@@ -23,6 +23,21 @@ public enum Commands {
         this.tooltip = tooltip;
     }
 
+    /**
+     * Finds the command with the given code.
+     * @param code command code to search with.
+     * @return Command with the corresponding code or null if not found.
+     */
+    public static Commands find(int code) {
+        for (Commands cmd : Commands.values()) {
+            if (cmd.getCode() == code) {
+                return cmd;
+            }
+        }
+
+        return null;
+    }
+
     public int getCode() {
         return code;
     }
