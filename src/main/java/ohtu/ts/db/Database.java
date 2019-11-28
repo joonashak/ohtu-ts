@@ -6,8 +6,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.flywaydb.core.Flyway;
 
-import ohtu.ts.utils.Configuration;
-
 /**
  * Provides database connection and automatic migration.
  *
@@ -28,11 +26,9 @@ public class Database {
     // Path to sqlite database file.
     String path = System.getProperty("user.home").concat("/.ohtu-ts/");
 
-    // Filename for database (with path).
-    Configuration config = new Configuration();
-
+    // TODO: Redo this, just a quick fix (config didn't work with jar).
     // Use TESTING toggle to manage database file:
-    String dbFile = TESTING ? TESTING_DB : config.getDbFile();
+    String dbFile = TESTING ? TESTING_DB : "main.db";
 
     // Connection string for database driver.
     String connStr = new StringBuilder("jdbc:sqlite:")
