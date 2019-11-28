@@ -53,7 +53,7 @@ checkstyle {
 }
 
 test {
-    environment 'OHTU_TS_ENV', 'test'
+    environment 'OHTU_TS_TEST', 'true'
     testLogging.showStandardStreams = true
     systemProperties System.getProperties()
 }

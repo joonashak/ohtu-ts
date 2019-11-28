@@ -18,12 +18,6 @@ gradle test
 gradle jacocoTestReport
 ```
 
-### Run BDD tests
-
-```bash
-gradle cucumber
-```
-
 ## Documentation
 
 [Sprint backlog](https://docs.google.com/spreadsheets/d/1Ac3qACtyknZ2TekVcMgAAftpzhx3A5oApzwwDwFgvnk/edit#gid=7)

@@ -15,9 +15,8 @@ public class Database {
 
     // Path to sqlite database file.
     String path = System.getProperty("user.home").concat("/.ohtu-ts/");
-
-    // Use TESTING toggle to manage database file:
-    String dbFile = System.getenv("OHTU_TS_ENV").equals("test") ? "test.db" : "main.db";
+    String runningTests = System.getenv("OHTU_TS_TEST");
+    String dbFile = runningTests != null ? "test.db" : "main.db";
 
     // Connection string for database driver.
     String connStr = new StringBuilder("jdbc:sqlite:")
