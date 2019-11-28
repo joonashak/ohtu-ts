@@ -59,3 +59,9 @@ test {
 run {
     standardInput = System.in
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'ohtu.ts.App'
+    }
+}
