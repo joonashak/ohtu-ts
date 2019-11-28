@@ -9,7 +9,6 @@ import java.util.List;
 import ohtu.ts.io.StubIO;
 import ohtu.ts.services.ReadingTipService;
 import ohtu.ts.ui.TextUI;
-import ohtu.ts.utils.Configuration;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -19,7 +18,6 @@ import static org.junit.Assert.assertThat;
  */
 public class Stepdefs {
     
-    private Configuration configuration = new Configuration();
     private List<String> commands = new ArrayList<>();
     private StubIO io = new StubIO(commands);
     private ReadingTipService service = new ReadingTipService();

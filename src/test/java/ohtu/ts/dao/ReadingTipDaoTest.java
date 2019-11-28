@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import static ohtu.ts.dao.Dao.closeAll;
 import ohtu.ts.db.Database;
-import ohtu.ts.utils.Configuration;
 import org.junit.After;
 import org.junit.Before;
 
@@ -16,7 +15,6 @@ import org.junit.Before;
  */
 public class ReadingTipDaoTest {
 
-    private Configuration configuration;
     private ReadingTipDao readingTipDao;
     private Database db;
 
@@ -26,7 +24,6 @@ public class ReadingTipDaoTest {
     @Before
     public void setUp() {
 
-        configuration = new Configuration();
         db = new Database();
 
         try {
@@ -61,8 +58,6 @@ public class ReadingTipDaoTest {
     @After
     public void tearDown() {
         //delete database file
-        File dbFile = new File(configuration.getDbFile());
-        dbFile.delete();
     }
 
 }

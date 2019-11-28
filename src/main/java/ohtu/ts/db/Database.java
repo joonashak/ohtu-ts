@@ -13,22 +13,11 @@ import org.flywaydb.core.Flyway;
  */
 public class Database {
 
-    //// TOGGLE ME
-    public static boolean TESTING;
-
-    public static final String TESTING_DB;
-
-    static {
-        setTesting(true);
-        TESTING_DB = "testDbFile.db";
-    }
-
     // Path to sqlite database file.
     String path = System.getProperty("user.home").concat("/.ohtu-ts/");
 
-    // TODO: Redo this, just a quick fix (config didn't work with jar).
     // Use TESTING toggle to manage database file:
-    String dbFile = TESTING ? TESTING_DB : "main.db";
+    String dbFile = System.getenv("OHTU_TS_ENV").equals("test") ? "test.db" : "main.db";
 
     // Connection string for database driver.
     String connStr = new StringBuilder("jdbc:sqlite:")
@@ -70,9 +59,5 @@ public class Database {
         }
 
         return conn;
-    }
-
-    public static void setTesting(boolean value) {
-        TESTING = value;
     }
 }
