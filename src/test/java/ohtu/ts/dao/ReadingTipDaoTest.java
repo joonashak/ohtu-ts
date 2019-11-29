@@ -1,6 +1,5 @@
 package ohtu.ts.dao;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

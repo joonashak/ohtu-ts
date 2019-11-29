@@ -1,8 +1,6 @@
-package ohtu.domain;
+package ohtu.ts.domain;
 
-import ohtu.ts.domain.Book;
 import ohtu.ts.domain.Types;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

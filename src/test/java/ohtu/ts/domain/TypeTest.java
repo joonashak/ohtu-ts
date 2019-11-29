@@ -1,4 +1,4 @@
-package ohtu.domain;
+package ohtu.ts.domain;
 
 import ohtu.ts.domain.Type;
 import org.junit.Before;

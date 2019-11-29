@@ -31,7 +31,6 @@ public class ReadingTipService {
         String author = book.getAuthor();
         String isbn = book.getIsbn();
         String title = book.getTitle();
-        Types type = book.getType();
 
         try {
             rtDao.save(

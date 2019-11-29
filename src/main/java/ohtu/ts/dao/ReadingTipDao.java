@@ -6,10 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import static ohtu.ts.dao.Dao.closeAll;
 import ohtu.ts.db.Database;
 import ohtu.ts.domain.ReadingTip;
-import ohtu.ts.domain.Type;
 import ohtu.ts.domain.Types;
 
 /**

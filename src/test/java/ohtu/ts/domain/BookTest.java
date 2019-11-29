@@ -2,10 +2,7 @@ package ohtu.ts.domain;
 
 import ohtu.ts.domain.Book;
 import ohtu.ts.domain.Types;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
