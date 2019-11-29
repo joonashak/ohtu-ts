@@ -51,7 +51,7 @@ public class StubIO implements IO {
 
     @Override
     public int readInt(String text) {
-        // TODO Auto-generated method stub
-        return 0;
+        print(text);
+        return Integer.parseInt(inputs.get(i++));
     }
 }
