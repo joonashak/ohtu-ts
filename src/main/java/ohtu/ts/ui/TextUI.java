@@ -27,14 +27,10 @@ public class TextUI {
     }
 
     public int askCommand(IO io) {
-        StringBuilder prompt = new StringBuilder("Anna haluamasi komennon numero:\n");
+        StringBuilder prompt = new StringBuilder("\nAnna haluamasi komennon numero:\n");
 
         for (Commands cmd : Commands.values()) {
-            prompt.append("    ")
-                .append(cmd.getCode())
-                .append(".  ")
-                .append(cmd.getTooltip())
-                .append("\n");
+            prompt.append(String.format("    %s.  %s\n", cmd.getCode(), cmd.getTooltip()));
         }
 
         prompt.append("\n>> ");
@@ -50,13 +46,12 @@ public class TextUI {
         String author = io.readLine("kirjailija: ");
         String isbn = io.readLine("isbn: ");
         String title = io.readLine("otsikko: ");
-        Book book = new Book(1, title, author, isbn);
+        Book book = new Book(title, author, isbn);
         return book;
     }
 
     public void run() {
         while (true) {
-            System.out.println("\n");
             Commands cmd = Commands.find(askCommand(io));
 
             switch (cmd) {

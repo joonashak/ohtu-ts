@@ -16,12 +16,7 @@ public class ReadingTipTest {
     
     @Before
     public void setUp() {
-        tip = new ReadingTip(12, null, "Jarno Virtanen", "123-23402420", "Testauksen tekemistä");
-    }
-    
-    @Test
-    public void ReadingTipGetIdMethodWorks() {
-        assertEquals(tip.getId().intValue(), 12);
+        tip = new ReadingTip(null);
     }
     
     @Test

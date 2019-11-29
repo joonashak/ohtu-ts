@@ -11,18 +11,8 @@ public class ReadingTip {
     Types type;
     String author, isbn, title;
 
-    public ReadingTip(
-        Integer id,
-        Types type,
-        String author,
-        String isbn,
-        String title
-    ) {
-        this.id = id;
+    public ReadingTip(Types type) {
         this.type = type;
-        this.author = author;
-        this.isbn = isbn;
-        this.title = title;
     }
 
     // Default getters and setters:

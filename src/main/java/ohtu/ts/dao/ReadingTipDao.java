@@ -55,18 +55,14 @@ public class ReadingTipDao extends Dao {
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
-            Types type = null;
-            int id = rs.getInt("id"); 
-            int type_id = rs.getInt("type_id");
-            if (type_id == Types.BOOK.getId()) {
-                type = Types.BOOK;
-            }
-            String title = rs.getString("title");
-            String author = rs.getString("author");
-            String isbn = rs.getString("isbn");
-            ReadingTip tip = new ReadingTip(id, type, author, isbn, title);
+            ReadingTip tip = new ReadingTip(Types.find(rs.getInt("type_id")));
+            tip.setId(rs.getInt("id"));
+            tip.setTitle(rs.getString("title"));
+            tip.setAuthor(rs.getString("author"));
+            tip.setIsbn(rs.getString("isbn"));
             readingTips.add(tip);
         }
+
         closeAll(rs, stmt, conn);
         return readingTips;
     }

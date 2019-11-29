@@ -16,6 +16,21 @@ public enum Types {
         this.name = name;
     }
 
+    /**
+     * Finds the type with the given code.
+     * @param id type id to search with.
+     * @return Type with the corresponding id or null if not found.
+     */
+    public static Types find(int id) {
+        for (Types t : Types.values()) {
+            if (t.getId() == id) {
+                return t;
+            }
+        }
+
+        return null;
+    }
+
     public int getId() {
         return this.id;
     }
