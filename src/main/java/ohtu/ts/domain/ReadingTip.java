@@ -59,7 +59,7 @@ public class ReadingTip {
     
     public String toString() {
         return new StringBuilder()
-            .append("Tyyppi: Kirja, ")
+            .append(String.format("Tyyppi: %s, ", type.getName()))
             .append(String.format("Otsikko: %s, ", title))
             .append(String.format("Kirjoittaja: %s, ", author))
             .append(String.format("ISBN: %s", isbn))

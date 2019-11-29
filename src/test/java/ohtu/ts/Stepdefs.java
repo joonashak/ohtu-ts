@@ -35,9 +35,9 @@ public class Stepdefs {
 
     @When("book title {string}, author {string} and ISBN {string} are given")
     public void titleAuthorAndISBNAreGiven(String title, String author, String ISBN) {
+        commands.add(title);
         commands.add(author);
         commands.add(ISBN);
-        commands.add(title);
     }
 
     @Then("system will respond with {string}")

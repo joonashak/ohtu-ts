@@ -35,6 +35,15 @@ public class ReadingTipService {
         }
     }
 
+    public void save(ReadingTip tip) {
+        try {
+            rtDao.save(tip);
+        } catch (Exception e) {
+            System.out.println("error");
+            System.out.println(e);
+        }
+    }
+
     public List<ReadingTip> listTips() {
         try {
             List<ReadingTip> tips = rtDao.findAll();
