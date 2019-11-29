@@ -1,8 +1,7 @@
 package ohtu.ts.domain;
 
 /**
- * Type definitions for ReadingTips. Note that id and name must be
- * identical to the database table Type.
+ * Type definitions for ReadingTips.
  * @author Joonas Häkkinen
  */
 public enum Types {
