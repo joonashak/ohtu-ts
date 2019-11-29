@@ -42,7 +42,7 @@ public class Stepdefs {
 
     @Then("system will respond with {string}")
     public void systemWillRespondWithLukuvinkkiLisätty(String string) {
-        commands.add("lopeta");
+        commands.add("3");
         ui.run();
         // The sixth thing that this program prints:
         String printout = io.getOutputs().get(5);
@@ -52,7 +52,7 @@ public class Stepdefs {
     
     @Then("system will respond first with {string}")
     public void systemWillRespondFirstWithReadingTip(String string) {
-        commands.add("lopeta");
+        commands.add("3");
         ui.run(); 
         //Get the third last print from stubIO outputs
         String printout = io.getOutputAt(io.lastOutputIndex() - 2);
