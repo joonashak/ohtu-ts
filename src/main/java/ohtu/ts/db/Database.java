@@ -17,6 +17,10 @@ public class Database {
     String path = System.getProperty("user.home").concat("/.ohtu-ts/");
     String runningTests = System.getenv("OHTU_TS_TEST");
     String dbFile = runningTests != null ? "test.db" : "main.db";
+    String dbfilePath = new StringBuilder()
+            .append(path)
+            .append(dbFile)
+            .toString();
 
     // Connection string for database driver.
     String connStr = new StringBuilder("jdbc:sqlite:")
@@ -58,5 +62,9 @@ public class Database {
         }
 
         return conn;
+    }
+    
+    public File getDbFile() {
+        return new File(dbfilePath);
     }
 }

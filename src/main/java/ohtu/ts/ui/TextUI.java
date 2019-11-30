@@ -26,7 +26,11 @@ public class TextUI {
         this.rtService = rtService;
     }
 
-    public int askCommand(IO io) {
+    public int getCommand(IO io) {
+        return io.readInt(askCommand());
+    }
+    
+    public String askCommand() {
         StringBuilder prompt = new StringBuilder("Anna haluamasi komennon numero:\n");
 
         for (Commands cmd : Commands.values()) {
@@ -38,7 +42,7 @@ public class TextUI {
         }
 
         prompt.append("\n>> ");
-        return io.readInt(prompt.toString());
+        return prompt.toString();
     }
 
     public String askType(IO io) {
@@ -57,7 +61,7 @@ public class TextUI {
     public void run() {
         while (true) {
             System.out.println("\n");
-            Commands cmd = Commands.find(askCommand(io));
+            Commands cmd = Commands.find(getCommand(io));
 
             switch (cmd) {
                 case ADD: {
