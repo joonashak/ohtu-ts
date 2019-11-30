@@ -22,7 +22,8 @@ public class BookTest {
                 .append("Tyyppi: Kirja, ")
                 .append(String.format("Otsikko: %s, ", "Koodauksen alkeet"))
                 .append(String.format("Kirjoittaja: %s, ", "Mikko Mallikas"))
-                .append(String.format("ISBN: %s", "978-232324234")).toString();
+                .append(String.format("ISBN: %s", "978-232324234"))
+                .toString();
     }
 
     @Test
