@@ -1,62 +1,70 @@
 package ohtu.ts.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
-import static ohtu.ts.dao.Dao.closeAll;
+import java.util.ArrayList;
+import java.util.List;
 import ohtu.ts.db.Database;
+import ohtu.ts.domain.ReadingTip;
+import ohtu.ts.domain.Types;
 import org.junit.After;
 import org.junit.Before;
-
+import org.junit.Test;
+import static org.junit.Assert.*;
 /**
  *
  * @author ida
  */
 public class ReadingTipDaoTest {
 
-    private ReadingTipDao readingTipDao;
+    private ReadingTipDao dao;
     private Database db;
 
     public ReadingTipDaoTest() {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
 
         db = new Database();
 
         try {
-            readingTipDao = new ReadingTipDao(db);
+            dao = new ReadingTipDao(db);
         } catch (SQLException e) {
-            System.out.println("error");
-            System.out.println(e);
+            throw new SQLException(new StringBuilder()
+                    .append("Error in setting up ReadingTipDao. ")
+                    .append(e.getMessage())
+                    .toString());
         }
 
-        try {
-            Connection conn = db.connect();
-            String sql = new StringBuilder()
-                    .append("INSERT INTO ReadingTip")
-                    .append("(type_id, title, author, isbn)")
-                    .append("VALUES (?,?,?,?)")
-                    .toString();
-
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, 1); //Type 1 = Kirja
-            stmt.setString(2, "kirjan nimi");
-            stmt.setString(3, "kirjailija");
-            stmt.setString(4, "isbn-1234");
-
-            stmt.executeUpdate();
-            closeAll(stmt, conn);
-
-        } catch (Exception e) {
-            throw new AbstractMethodError("Error in inserting book into db: " + e.getMessage());
-        }
+    }
+    
+    @Test
+    public void findAllSavedReadingTipsThatAreBookAndVideo() throws SQLException {
+        ReadingTip book = new ReadingTip(Types.find(1));
+        book.setTitle("booktitle");
+        book.setAuthor("bookauthor");
+        book.setIsbn("isbn");
+        
+        ReadingTip video = new ReadingTip(Types.find(2));
+        video.setTitle("videotitle");
+        video.setUrl("url");
+        
+        List<ReadingTip> tips = new ArrayList<>();
+        tips.add(book);
+        tips.add(video);
+        
+        dao.save(book);
+        dao.save(video);
+        
+        //to-do: equals() for readingtip
+        //assertEquals(tips, dao.findAll());
     }
 
     @After
     public void tearDown() {
-        //delete database file
+        //delete testdb file
+        db.getDbFile().delete();
     }
 
 }
