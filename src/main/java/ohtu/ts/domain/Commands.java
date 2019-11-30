@@ -10,7 +10,7 @@ public enum Commands {
     QUIT(3, "Lopeta");
 
     // enum fields
-    int code;
+    public int code;
     String tooltip;
 
     /**

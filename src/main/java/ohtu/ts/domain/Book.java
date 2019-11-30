@@ -6,8 +6,16 @@ package ohtu.ts.domain;
  */
 public class Book extends ReadingTip {
 
-    public Book(int id, String title, String author, String isbn) {
-        super(id, Types.BOOK, author, isbn, title);
+    public Book(Integer id, String title, String author, String isbn) {
+        super(Types.BOOK);
+        setId(id);
+        setTitle(title);
+        setAuthor(author);
+        setIsbn(isbn);
+    }
+
+    public Book(String title, String author, String isbn) {
+        this(null, title, author, isbn);
     }
 
     @Override

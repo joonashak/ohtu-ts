@@ -47,9 +47,9 @@ public class Stepdefs {
 
     @When("book title {string}, author {string} and ISBN {string} are given")
     public void titleAuthorAndISBNAreGiven(String title, String author, String ISBN) {
+        commands.add(title);
         commands.add(author);
         commands.add(ISBN);
-        commands.add(title);
     }
 
     @Then("system will respond with {string}")
@@ -66,13 +66,8 @@ public class Stepdefs {
     public void systemWillRespondFirstWithReadingTip(String string) {
         commands.add("3");
         ui.run();
-        //Ensure there is nothing before the first reading tip
-        //i.e the last thing in StubIO outputs is ask command        
-        String printout = io.getOutputAt(io.lastOutputIndex() - 3);
-        assertThat(printout,
-                is(ui.askCommand()));
         //Get the first reading tip which is third last print from stubIO outputs    
-        printout = io.getOutputAt(io.lastOutputIndex() - 2);
+        String printout = io.getOutputAt(io.lastOutputIndex() - 2);
         assertThat(printout,
                 is(string));
     }

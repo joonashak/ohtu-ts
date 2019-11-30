@@ -6,9 +6,9 @@
 package ohtu.ts.ui;
 
 import java.util.List;
-import ohtu.ts.domain.Book;
 import ohtu.ts.domain.Commands;
 import ohtu.ts.domain.ReadingTip;
+import ohtu.ts.domain.Types;
 import ohtu.ts.io.IO;
 import ohtu.ts.services.ReadingTipService;
 
@@ -26,42 +26,13 @@ public class TextUI {
         this.rtService = rtService;
     }
 
-    public int getCommand(IO io) {
-        return io.readInt(askCommand());
-    }
-    
-    public String askCommand() {
-        StringBuilder prompt = new StringBuilder("Anna haluamasi komennon numero:\n");
-
-        for (Commands cmd : Commands.values()) {
-            prompt.append("    ")
-                .append(cmd.getCode())
-                .append(".  ")
-                .append(cmd.getTooltip())
-                .append("\n");
-        }
-
-        prompt.append("\n>> ");
-        return prompt.toString();
-    }
-
-    public String askType(IO io) {
-        String type = io.readLine("Valitse lukuvinkin tyyppi: Kirja");
-        return type;
-    }
-
-    public Book askBookDetails(IO io) {
-        String author = io.readLine("kirjailija: ");
-        String isbn = io.readLine("isbn: ");
-        String title = io.readLine("otsikko: ");
-        Book book = new Book(1, title, author, isbn);
-        return book;
-    }
-
     public void run() {
         while (true) {
-            System.out.println("\n");
-            Commands cmd = Commands.find(getCommand(io));
+            // Loop over until correct command received (switch cannot handle null).
+            Commands cmd = null;
+            while (cmd == null) {
+                cmd = Prompts.getCommandFromUser(io);
+            }
 
             switch (cmd) {
                 case ADD: {
@@ -79,21 +50,33 @@ public class TextUI {
                 case QUIT: {
                     return;
                 }
-                default:
-                    // Run something in case of wrong command etc.
-                    break;
             }
         }
     }
 
     private boolean commandAdd() {
-        String type = askType(io);
-
-        if (type.equals("Kirja")) {
-            Book book = askBookDetails(io);
-            rtService.saveBook(book);
-            io.print("Lukuvinkki lisätty: " + book.toString());
+        // Loop over until valid type received.
+        Types type = null;
+        while (type == null) {
+            type = Prompts.getTypeFromUser(io);
         }
+
+        // Select correct type of TipUI.
+        TipUI tipUi = null;
+        switch (type) {
+            case BOOK:
+                tipUi = new BookTipUI();
+                break;
+            case VIDEO:
+                tipUi = new VideoTipUI();
+                break;
+            default:
+                break;
+        }
+
+        ReadingTip tip = tipUi.getTipFromUser(io);
+        rtService.save(tip);
+        io.print("Lukuvinkki lisätty!");
         return true;
     }
 

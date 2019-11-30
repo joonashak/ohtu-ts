@@ -32,8 +32,8 @@ public class ReadingTipDao extends Dao {
 
         String sql = new StringBuilder()
                 .append("INSERT INTO ReadingTip")
-                .append("(type_id, title, author, isbn)")
-                .append("VALUES (?,?,?,?)")
+                .append("(type_id, title, author, isbn, url)")
+                .append("VALUES (?,?,?,?,?)")
                 .toString();
 
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -41,6 +41,7 @@ public class ReadingTipDao extends Dao {
         stmt.setString(2, tip.getTitle());
         stmt.setString(3, tip.getAuthor());
         stmt.setString(4, tip.getIsbn());
+        stmt.setString(5, tip.getUrl());
 
         stmt.executeUpdate();
         closeAll(stmt, conn);
@@ -50,23 +51,20 @@ public class ReadingTipDao extends Dao {
         Connection conn = db.connect();
         List<ReadingTip> readingTips = new ArrayList<>();
         
-        String sql = "SELECT id, type_id, title, author, isbn FROM ReadingTip";
+        String sql = "SELECT id, type_id, title, author, isbn, url FROM ReadingTip";
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
-            Types type = null;
-            int id = rs.getInt("id"); 
-            int type_id = rs.getInt("type_id");
-            if (type_id == Types.BOOK.getId()) {
-                type = Types.BOOK;
-            }
-            String title = rs.getString("title");
-            String author = rs.getString("author");
-            String isbn = rs.getString("isbn");
-            ReadingTip tip = new ReadingTip(id, type, author, isbn, title);
+            ReadingTip tip = new ReadingTip(Types.find(rs.getInt("type_id")));
+            tip.setId(rs.getInt("id"));
+            tip.setTitle(rs.getString("title"));
+            tip.setAuthor(rs.getString("author"));
+            tip.setIsbn(rs.getString("isbn"));
+            tip.setUrl(rs.getString("url"));
             readingTips.add(tip);
         }
+
         closeAll(rs, stmt, conn);
         return readingTips;
     }

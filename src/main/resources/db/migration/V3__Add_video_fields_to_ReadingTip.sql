@@ -1,0 +1,2 @@
+ALTER TABLE ReadingTip
+ADD COLUMN url TEXT;
