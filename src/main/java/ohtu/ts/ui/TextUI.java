@@ -67,7 +67,9 @@ public class TextUI {
             case BOOK:
                 tipUi = new BookTipUI();
                 break;
-        
+            case VIDEO:
+                tipUi = new VideoTipUI();
+                break;
             default:
                 break;
         }

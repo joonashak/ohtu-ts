@@ -49,7 +49,7 @@ public class Prompts {
             prompt.append(String.format("    %s.  %s\n", t.getId(), t.getName()));
         }
 
-        prompt.append("\n>>");
+        prompt.append("\n>> ");
 
         // Handle invalid input recursively.
         try {

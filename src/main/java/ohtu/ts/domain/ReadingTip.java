@@ -9,7 +9,7 @@ package ohtu.ts.domain;
 public class ReadingTip {
     Integer id;
     Types type;
-    String author, isbn, title;
+    String author, isbn, title, url;
 
     public ReadingTip(Types type) {
         this.type = type;
@@ -56,13 +56,19 @@ public class ReadingTip {
     public void setType(Types type) {
         this.type = type;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
     
     public String toString() {
         return new StringBuilder()
             .append(String.format("Tyyppi: %s, ", type.getName()))
-            .append(String.format("Otsikko: %s, ", title))
-            .append(String.format("Kirjoittaja: %s, ", author))
-            .append(String.format("ISBN: %s", isbn))
+            .append(String.format("Otsikko: %s", title))
             .toString();
     }
 }

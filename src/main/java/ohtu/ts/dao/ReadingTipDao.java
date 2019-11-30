@@ -32,8 +32,8 @@ public class ReadingTipDao extends Dao {
 
         String sql = new StringBuilder()
                 .append("INSERT INTO ReadingTip")
-                .append("(type_id, title, author, isbn)")
-                .append("VALUES (?,?,?,?)")
+                .append("(type_id, title, author, isbn, url)")
+                .append("VALUES (?,?,?,?,?)")
                 .toString();
 
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -41,6 +41,7 @@ public class ReadingTipDao extends Dao {
         stmt.setString(2, tip.getTitle());
         stmt.setString(3, tip.getAuthor());
         stmt.setString(4, tip.getIsbn());
+        stmt.setString(5, tip.getUrl());
 
         stmt.executeUpdate();
         closeAll(stmt, conn);
@@ -50,7 +51,7 @@ public class ReadingTipDao extends Dao {
         Connection conn = db.connect();
         List<ReadingTip> readingTips = new ArrayList<>();
         
-        String sql = "SELECT id, type_id, title, author, isbn FROM ReadingTip";
+        String sql = "SELECT id, type_id, title, author, isbn, url FROM ReadingTip";
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
 
@@ -60,6 +61,7 @@ public class ReadingTipDao extends Dao {
             tip.setTitle(rs.getString("title"));
             tip.setAuthor(rs.getString("author"));
             tip.setIsbn(rs.getString("isbn"));
+            tip.setUrl(rs.getString("url"));
             readingTips.add(tip);
         }
 

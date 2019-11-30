@@ -5,7 +5,8 @@ package ohtu.ts.domain;
  * @author Joonas Häkkinen
  */
 public enum Types {
-    BOOK(1, "Kirja");
+    BOOK(1, "Kirja"),
+    VIDEO(2, "Video");
 
     // enum fields
     int id;
