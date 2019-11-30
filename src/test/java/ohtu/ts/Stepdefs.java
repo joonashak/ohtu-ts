@@ -51,13 +51,19 @@ public class Stepdefs {
         commands.add(author);
         commands.add(ISBN);
     }
+    
+    @When("video title {string}, url {string} are given")
+    public void titleAndUrlAreGiven(String title, String url) {
+        commands.add(title);
+        commands.add(url);
+    }
 
     @Then("system will respond with {string}")
     public void systemWillRespondWithLukuvinkkiLisätty(String string) {
         commands.add("3");
         ui.run();
-        // The sixth thing that this program prints:
-        String printout = io.getOutputs().get(5);
+        // The last thing that this program prints after loop starts back:
+        String printout = io.getOutputs().get(io.lastOutputIndex() - 1);
         assertThat(printout,
                 is(string));             
     }
