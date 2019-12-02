@@ -1,4 +1,4 @@
-package ohtu.ts.domain;
+package ohtu.ts.ui;
 
 
 import org.junit.Test;

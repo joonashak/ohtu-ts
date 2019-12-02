@@ -6,7 +6,6 @@
 package ohtu.ts.ui;
 
 import java.util.List;
-import ohtu.ts.domain.Commands;
 import ohtu.ts.domain.ReadingTip;
 import ohtu.ts.domain.Types;
 import ohtu.ts.io.IO;

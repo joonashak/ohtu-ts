@@ -5,12 +5,13 @@ import ohtu.ts.domain.ReadingTip;
 import ohtu.ts.io.IO;
 
 public class BookTipUI implements TipUI {
+
     @Override
     public ReadingTip getTipFromUser(IO io) {
-        return new Book( 
-            io.readLine("Otsikko: "),
-            io.readLine("Kirjoittaja: "), 
-            io.readLine("ISBN: ")
-        );
+
+        String title = io.readLine("Otsikko: ");
+        String writer = io.readLine("Kirjoittaja: ");
+        String isbn = io.readLine("ISBN: ");
+        return new Book(title, writer, isbn);
     }
 }

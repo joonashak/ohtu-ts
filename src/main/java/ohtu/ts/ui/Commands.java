@@ -1,8 +1,10 @@
-package ohtu.ts.domain;
+package ohtu.ts.ui;
 
 /**
  * Command definitions with numbered shortcuts.
+ *
  * @author Joonas Häkkinen
+ * @author Arttu Mykkänen
  */
 public enum Commands {
     ADD(1, "Lisää lukuvinkki"),
@@ -10,11 +12,12 @@ public enum Commands {
     QUIT(3, "Lopeta");
 
     // enum fields
-    public int code;
-    String tooltip;
+    private int code;
+    private String tooltip;
 
     /**
      * Named command with shortcut and tooltip text.
+     *
      * @param code Numbered shortcut, user enters this as a command.
      * @param tooltip Text describing this command.
      */
@@ -25,6 +28,7 @@ public enum Commands {
 
     /**
      * Finds the command with the given code.
+     *
      * @param code command code to search with.
      * @return Command with the corresponding code or null if not found.
      */

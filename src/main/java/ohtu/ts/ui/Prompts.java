@@ -1,19 +1,19 @@
 package ohtu.ts.ui;
 
-import ohtu.ts.domain.Commands;
 import ohtu.ts.domain.Types;
 import ohtu.ts.io.IO;
 
 /**
  * Collection of prompts to get input from the user.
+ *
  * @author Joonas Häkkinen
  */
 public class Prompts {
 
     /**
-     * Get a command from the user.
-     * Lists possible commands and prompts user to select one as a number. Repeats
-     * until a number is entered.
+     * Get a command from the user. Lists possible commands and prompts user to
+     * select one as a number. Repeats until a number is entered.
+     *
      * @param io IO object for prompting the user.
      * @return Commands or null if not found.
      */
@@ -36,9 +36,9 @@ public class Prompts {
     }
 
     /**
-     * Get a reading tip type from the user.
-     * Lists possible types and prompts user to select one as a number. Repeats
-     * until a number is entered.
+     * Get a reading tip type from the user. Lists possible types and prompts
+     * user to select one as a number. Repeats until a number is entered.
+     *
      * @param io IO object for prompting the user.
      * @return Types or null if not found.
      */
