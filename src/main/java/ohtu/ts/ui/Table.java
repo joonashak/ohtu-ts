@@ -93,7 +93,7 @@ public class Table implements CommandLineFragment {
         assert headers.length > 1 && columnWidths.length == headers.length;
         StringBuilder sb = new StringBuilder();
         sb.append(formatRow(headers)).append('\n');
-        for (int i = 0; i < maxWidth; i++) {
+        for (int i = 0; i < actualWidth; i++) {
             sb.append(LINE_SEPARATOR);
         }
         sb.append('\n');
