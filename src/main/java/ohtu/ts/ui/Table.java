@@ -90,8 +90,8 @@ public class Table implements CommandLineFragment {
 
     @Override
     public int getHeight() {
-        // headers + rows + line under each one
-        return (1 + rows.size() * 2);
+        // headers + rows + underline headers
+        return (2 + rows.size());
     }
 
 }
