@@ -11,3 +11,4 @@ Scenario: user can list all reading tips
     When command "2" is selected
     Then system will respond with a list that contains at least the titles "title1" "title2"
 
+

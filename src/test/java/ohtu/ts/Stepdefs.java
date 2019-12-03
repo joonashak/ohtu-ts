@@ -1,10 +1,10 @@
 package ohtu.ts;
 
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.Before;
+import io.cucumber.java.After;
 import java.util.ArrayList;
 import java.util.List;
 import ohtu.ts.db.Database;
@@ -66,18 +66,15 @@ public class Stepdefs {
         String printout = io.getOutputs().get(io.lastOutputIndex() - 1);
         assertThat(printout,
                 is(string));
-        ui.stop(); // pull an emergency stop to prevent stack overflow
     }
 
-    @Then("system will respond with a list that contains {string} {string}")
+    @Then("system will respond with a list that contains at least the titles {string} {string}")
     public void systemWillRespondWithAListThatContainsAtLeastTheTitles(String string, String string2) {
+        commands.add("3");
         ui.run();
-        String[] printout = new String[2];
-        printout[0] = io.getOutputs().get(io.lastOutputIndex() - 2);
-        printout[1] = io.getOutputs().get(io.lastOutputIndex() - 1);
-        assertThat(printout[0], containsString(string));
-        assertThat(printout[1], containsString(string2));
-        ui.stop();  // pull an emergency stop to prevent stack overflow
+        String printout = io.getOutputs().get(io.lastOutputIndex() - 1);
+        assertThat(printout, containsString(string2));
+        assertThat(printout, containsString(string));
     }
 
     @When("no filters have been set")

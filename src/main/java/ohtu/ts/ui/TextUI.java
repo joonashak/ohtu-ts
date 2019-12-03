@@ -102,8 +102,5 @@ public class TextUI {
         io.print(table.toString());
         return true;
     }
-    
-    public void stop() {
-        System.exit(0);
-    }
+
 }
