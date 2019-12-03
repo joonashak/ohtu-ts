@@ -5,6 +5,7 @@ import java.util.Scanner;
 /**
  *
  * @author ida
+ * @author Arttu
  */
 public class ConsoleIO implements IO {
 

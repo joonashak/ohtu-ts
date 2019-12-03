@@ -19,10 +19,12 @@ public class TextUI {
 
     private final IO io;
     private final ReadingTipService rtService;
+    private final Terminal terminal;
 
-    public TextUI(IO io, ReadingTipService rtService) {
+    public TextUI(IO io, ReadingTipService rtService, Terminal term) {
         this.io = io;
         this.rtService = rtService;
+        this.terminal = term;
     }
 
     public void run() {
@@ -83,10 +85,21 @@ public class TextUI {
         List<ReadingTip> tips = rtService.listTips();
         if (tips.isEmpty()) {
             io.print("Lukuvinkkejä ei ole vielä lisätty.");
+            return true;
         }
+        int[] terminalDims = null;
+        try {
+            terminalDims = terminal.getCommandLineDimensions();
+        } catch (Exception ex) {
+        }
+        assert terminalDims != null : "Terminal dims not initialized";
+        Table table = new Table(terminalDims[0], terminalDims[1]);
+        table.setHeaders("Id", "Title");
+        table.setColumnWidths(terminalDims[0] / 2, terminalDims[0] / 2);
         for (ReadingTip tip : tips) {
-            io.print(tip.toString());
+            table.addRow(tip.getId().toString(), tip.getTitle());
         }
+        io.print(table.toString());
         return true;
     }
 }
