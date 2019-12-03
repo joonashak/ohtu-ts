@@ -9,11 +9,5 @@ Scenario: user can list all reading tips
     And type "1" is given
     And book title "title2", author "author2" and ISBN "isbn-2" are given
     When command "2" is selected
-    Then system will respond first with "Tyyppi: Kirja, Otsikko: title1"
-    And system will respond second with "Tyyppi: Kirja, Otsikko: title2"
-
-  Scenario: user can list all reading tips
-    Given command "2" is selected
-    When no filters have been set
-    Then system will respond by outputting a list of all the reading tips
+    Then system will respond with a list that contains at least the titles "title1" "title2"
 

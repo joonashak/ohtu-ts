@@ -12,6 +12,7 @@ import ohtu.ts.io.StubIO;
 import ohtu.ts.services.ReadingTipService;
 import ohtu.ts.ui.Terminal;
 import ohtu.ts.ui.TextUI;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -65,24 +66,23 @@ public class Stepdefs {
         String printout = io.getOutputs().get(io.lastOutputIndex() - 1);
         assertThat(printout,
                 is(string));
+        ui.stop(); // pull an emergency stop to prevent stack overflow
     }
 
-    @Then("system will respond first with {string}")
-    public void systemWillRespondFirstWithReadingTip(String string) {
-        commands.add("3");
+    @Then("system will respond with a list that contains {string} {string}")
+    public void systemWillRespondWithAListThatContainsAtLeastTheTitles(String string, String string2) {
         ui.run();
-        //Get the first reading tip which is third last print from stubIO outputs    
-        String printout = io.getOutputAt(io.lastOutputIndex() - 2);
-        assertThat(printout,
-                is(string));
+        String[] printout = new String[2];
+        printout[0] = io.getOutputs().get(io.lastOutputIndex() - 2);
+        printout[1] = io.getOutputs().get(io.lastOutputIndex() - 1);
+        assertThat(printout[0], containsString(string));
+        assertThat(printout[1], containsString(string2));
+        ui.stop();  // pull an emergency stop to prevent stack overflow
     }
 
-    @Then("system will respond second with {string}")
-    public void systemWillRespondSecondWithReadingTip(String string) {
-        // Get the second reading tip which is second last print from stubIO outputs
-        String printout = io.getOutputAt(io.lastOutputIndex() - 1);
-        assertThat(printout,
-                is(string));
+    @When("no filters have been set")
+    public void noFiltersHaveBeenSet() {
+        // nothing yet
     }
 
     @After
