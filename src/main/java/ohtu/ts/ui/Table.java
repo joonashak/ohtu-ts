@@ -11,7 +11,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Create a table for showing data column-wise in a terminal using Strings. Not
+ * intended to be a user-facing class, but a utility class instead. Note that
+ * the headers and the column widths must be initialized before
+ * {@code toString()} is called.
  *
+ * @see toString()
  * @author Arttu Mykkänen <arttu.mykkanen@outlook.com>
  */
 public class Table implements CommandLineFragment {
@@ -22,7 +27,7 @@ public class Table implements CommandLineFragment {
 
     private String[] headers;
     private int[] columnWidths;
-    
+
     private int actualWidth;
 
     private static final String LINE_SEPARATOR = "-";
@@ -33,10 +38,20 @@ public class Table implements CommandLineFragment {
         this.rows = new ArrayList<>();
     }
 
+    /**
+     * Generate the header row for the table.
+     *
+     * @param headers
+     */
     public void setHeaders(String... headers) {
         this.headers = headers;
     }
 
+    /**
+     * Set fixed widths for each line in the table.
+     *
+     * @param widths
+     */
     public void setColumnWidths(int... widths) {
         this.actualWidth = Arrays.stream(widths).sum();
         if (actualWidth > maxWidth) {
@@ -67,6 +82,11 @@ public class Table implements CommandLineFragment {
         return Arrays.stream(row).collect(Collectors.joining(""));
     }
 
+    /**
+     * Generate and return the actual table.
+     *
+     * @return table
+     */
     @Override
     public String toString() {
         assert headers != null && columnWidths != null;
