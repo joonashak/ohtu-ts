@@ -2,11 +2,11 @@ package ohtu.ts.dao;
 
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import ohtu.ts.db.Database;
 import ohtu.ts.domain.ReadingTip;
 import ohtu.ts.domain.Types;
+import static org.hamcrest.CoreMatchers.containsString;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,9 +38,11 @@ public class ReadingTipDaoTest {
         }
 
     }
+
+    
     
     @Test
-    public void findAllSavedReadingTipsThatAreBookAndVideo() throws SQLException {
+    public void findAllReadingTipsThatAreSavedToDB() throws SQLException {
         ReadingTip book = new ReadingTip(Types.find(1));
         book.setTitle("booktitle");
         book.setAuthor("bookauthor");
@@ -50,15 +52,17 @@ public class ReadingTipDaoTest {
         video.setTitle("videotitle");
         video.setUrl("url");
         
-        List<ReadingTip> tips = new ArrayList<>();
-        tips.add(book);
-        tips.add(video);
-        
         dao.save(book);
-        dao.save(video);
-        
-        //to-do: equals() for readingtip
-        //assertEquals(tips, dao.findAll());
+        dao.save(video);        
+        List<ReadingTip> tips = dao.findAll();
+                
+        assertThat(tips.get(0).toString(), containsString(book.getTitle()));
+        assertThat(tips.get(1).toString(), containsString(video.getTitle()));
+    }
+    
+    @Test
+    public void findAllGivesEmptyListWhenNoTipsAreAddedToDB() throws SQLException { 
+        assertEquals(dao.findAll().size(), 0);
     }
 
     @After

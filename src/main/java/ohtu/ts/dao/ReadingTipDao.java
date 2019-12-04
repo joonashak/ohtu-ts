@@ -28,7 +28,7 @@ public class ReadingTipDao extends Dao {
      * @throws SQLException
      */
     public void save(ReadingTip tip) throws SQLException {
-        
+             
         try {
             Connection conn = db.connect();
 
@@ -53,7 +53,7 @@ public class ReadingTipDao extends Dao {
                     .append(e.getMessage())
                     .toString());
         }
-
+        
     }
     
     public List<ReadingTip> findAll() throws SQLException {
