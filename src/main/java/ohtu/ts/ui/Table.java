@@ -47,6 +47,10 @@ public class Table implements CommandLineFragment {
         this.headers = headers;
     }
 
+    public String[] getHeaders() {
+        return this.headers;
+    }
+    
     /**
      * Set fixed widths for each line in the table.
      *
@@ -59,7 +63,11 @@ public class Table implements CommandLineFragment {
         }
         this.columnWidths = widths;
     }
-
+    
+    public int[] getColumnWidths() {
+        return this.columnWidths;
+    }
+    
     public void addRow(String... columnVals) {
         if (rows.size() > maxHeight) {
             // do something if necessary
