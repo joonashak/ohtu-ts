@@ -5,6 +5,7 @@
  */
 package ohtu.ts.ui;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,20 +22,27 @@ public class TextUI {
 
     private final IO io;
     private final ReadingTipService rtService;
+    private boolean running;
 
     ////  Commands:
-    private static final String COM_ADD = "lisää";
-    private static final String COM_LIST = "listaa";
-    private static final String COM_EXIT = "lopeta";
+    private interface Command {
+        boolean execute();
+    }
+    private final HashMap<String, Command> commands;
 
     public TextUI(IO io, ReadingTipService rtService) {
         this.io = io;
         this.rtService = rtService;
+        this.running = false;
+        this.commands = new HashMap<>();
+        this.commands.put("lisää",  this::commandAdd);
+        this.commands.put("listaa", this::commandList);
+        this.commands.put("lopeta", this::commandQuit);
     }
 
     public String askCommand(IO io) {
         String command = io.readLine("Valitse komento: "
-                + Stream.of(COM_ADD, COM_LIST, COM_EXIT).collect(Collectors.joining(", ")));
+                + commands.keySet().stream().collect(Collectors.joining(", ")));
         return command;
     }
 
@@ -52,28 +60,12 @@ public class TextUI {
     }
 
     public void run() {
-        while (true) {
+        this.running = true;
+        while (this.running) {
             String command = askCommand(io);
-
-            switch (command) {
-                case COM_ADD: {
-                    if (!commandAdd()) {
-                        // something wrong
-                    }
-                    break;
-                }
-                case COM_LIST: {
-                    if (!commandList()) {
-                        // something wrong
-                    }
-                    break;
-                }
-                case COM_EXIT: {
-                    return;
-                }
-                default:
-                    // Run something in case of wrong command etc.
-                    break;
+            Command cmd = this.commands.getOrDefault(command, this::commandUnknownCommand);
+            if (!cmd.execute()) {
+                // something wrong
             }
         }
     }
@@ -97,6 +89,16 @@ public class TextUI {
         for (ReadingTip tip : tips) {
             io.print(tip.toString());
         }
+        return true;
+    }
+    
+    private boolean commandQuit() {
+        this.running = false;
+        return true;
+    }
+    
+    private boolean commandUnknownCommand() {
+        io.print("Virhe! Tuntematon käsky.");
         return true;
     }
 }
