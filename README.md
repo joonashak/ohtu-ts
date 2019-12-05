@@ -31,4 +31,3 @@ gradle cucumber
 [User manual](docs/user_manual.md)
 
 [Definition of done](docs/definition_of_done.md)
-
