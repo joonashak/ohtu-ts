@@ -77,7 +77,7 @@ public class Terminal {
      */
     private int parseCommandLineLinux(ProcessBuilder procBuilder)
             throws Exception {
-        assert (!procBuilder.command().isEmpty()): "Process command not initialized";
+        assert (!procBuilder.command().isEmpty()) : "Process command not initialized";
         Process process = procBuilder.start();
         BufferedReader reader
                 = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -101,7 +101,7 @@ public class Terminal {
     @Deprecated
     private int[] parseCommandLineWindows(ProcessBuilder procBuilder)
             throws Exception {
-        assert (!procBuilder.command().isEmpty()): "Process command not initialized";
+        assert (!procBuilder.command().isEmpty()) : "Process command not initialized";
         Process process = procBuilder.start();
         BufferedReader reader
                 = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -111,8 +111,8 @@ public class Terminal {
             throw new Exception("Abnormal command line");
         }
         reader.close();
-        return new int[]{Integer.parseInt(lines[0].split(":")[1],
-            Integer.parseInt(lines[1].split(":")[1]))};
+        return new int[]{Integer.parseInt(lines[1].split(":")[1].trim()) - 1,
+            Integer.parseInt(lines[0].split(":")[1].trim()) - 1};
     }
 
 }
