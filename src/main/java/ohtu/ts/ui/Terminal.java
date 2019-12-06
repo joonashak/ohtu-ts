@@ -8,7 +8,6 @@ package ohtu.ts.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 /**
  *
@@ -111,10 +110,9 @@ public class Terminal {
         if (retVal != 0) {
             throw new Exception("Abnormal command line");
         }
-        // System.out.println(Arrays.deepToString(lines));
         reader.close();
-        return new int[]{Integer.parseInt(lines[1].split(":")[1].trim()) - 1,
-            Integer.parseInt(lines[0].split(":")[1].trim()) - 1};
+        return new int[]{Integer.parseInt(lines[0].split(":")[1],
+            Integer.parseInt(lines[1].split(":")[1]))};
     }
 
 }
