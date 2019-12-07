@@ -54,4 +54,15 @@ public class ReadingTipService {
         }
         return null;
     }
+
+    public ReadingTip find(int id) {
+        try {
+            ReadingTip rt = rtDao.findById(id);
+            return rt;
+        } catch (Exception e) {
+            System.out.println("error");
+            System.out.println(e);
+            return null;
+        }
+    }
 }

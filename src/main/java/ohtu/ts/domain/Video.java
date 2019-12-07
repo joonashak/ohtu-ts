@@ -16,13 +16,4 @@ public class Video extends ReadingTip {
     public Video(String title, String url) {
         this(null, title, url);
     }
-
-    @Override
-    public String toString() {
-        return new StringBuilder()
-            .append("Tyyppi: Video, ")
-            .append(String.format("Otsikko: %s, ", title))
-            .append(String.format("URL: %s", url))
-            .toString();
-    }
 }

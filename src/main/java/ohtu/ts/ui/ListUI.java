@@ -7,6 +7,7 @@ import ohtu.ts.services.ReadingTipService;
 
 /**
  * TextUI component for browsing ReadingTips.
+ * @author Joonas Häkkinen
  */
 public class ListUI {
     // Default terminal size settings (width, height).
@@ -48,8 +49,14 @@ public class ListUI {
                 return;
             }
 
-            // TODO: remove
-            io.print("annoit id:n " + cmd + "\n\n");
+            // Show details view on valid ReadingTip id.
+            try {
+                DetailsUI dui = new DetailsUI(cmd);
+                io.print(dui.toString());
+                io.readLine("\n\nPaina ENTER palataksesi listaukseen.");
+            } catch (Exception e) {
+                io.print("\nLukuvinkkiä ei löytynyt, tarkasta ID:\n\n");
+            }
         }
     }
 
@@ -78,7 +85,7 @@ public class ListUI {
     }
 
     private Integer getCommandFromUser() {
-        String cmd = io.readLine("Anna ID tai paina ENTER palataksesi:\n>> ");
+        String cmd = io.readLine("\nAnna ID tai paina ENTER palataksesi:\n>> ");
 
         // Enter (empty string) is -1.
         if (cmd.length() == 0) {
