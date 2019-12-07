@@ -94,10 +94,10 @@ public class TextUI {
         }
         assert terminalDims != null : "Terminal dims not initialized";
         Table table = new Table(terminalDims[0], terminalDims[1]);
-        table.setHeaders("Id", "Title");
-        table.setColumnWidths(terminalDims[0] / 2, terminalDims[0] / 2);
+        table.setHeaders("Id", "Title", "Type");
+        table.setColumnWidths(terminalDims[0] / 3, terminalDims[0] / 3, terminalDims[0] / 3);
         for (ReadingTip tip : tips) {
-            table.addRow(tip.getId().toString(), tip.getTitle());
+            table.addRow(tip.getId().toString(), tip.getTitle(), tip.getType().getName());
         }
         io.print(table.toString());
         return true;
