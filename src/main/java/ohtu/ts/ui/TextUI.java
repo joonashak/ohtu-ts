@@ -61,17 +61,7 @@ public class TextUI {
         }
 
         // Select correct type of TipUI.
-        TipUI tipUi = null;
-        switch (type) {
-            case BOOK:
-                tipUi = new BookTipUI();
-                break;
-            case VIDEO:
-                tipUi = new VideoTipUI();
-                break;
-            default:
-                break;
-        }
+        TipUI tipUi = TipUI.selectTipUI(type);
 
         ReadingTip tip = tipUi.getTipFromUser(io);
         rtService.save(tip);

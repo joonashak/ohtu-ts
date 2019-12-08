@@ -13,9 +13,10 @@ public class VideoTipUI implements TipUI {
     @Override
     public String toString(ReadingTip rt) {
         return new StringBuilder()
-            .append("Tyyppi: Video, ")
-            .append(String.format("Otsikko: %s, ", rt.getTitle()))
-            .append(String.format("URL: %s", rt.getUrl()))
+            .append(String.format("ID:  %s\n", rt.getId()))
+            .append("Tyyppi:  Video\n")
+            .append(String.format("Otsikko:  %s\n", rt.getTitle()))
+            .append(String.format("URL:  %s", rt.getUrl()))
             .toString();
     }
 }

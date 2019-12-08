@@ -23,7 +23,6 @@ public class DetailsUI {
 
     @Override
     public String toString() {
-        // TODO: Add proper details.
-        return "Found ReadingTip with id " + readingTip.getId();
+        return TipUI.selectTipUi(readingTip).toString(readingTip);
     }
 }
