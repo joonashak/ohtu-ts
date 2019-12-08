@@ -18,4 +18,12 @@ public interface TipUI {
      * @return populated ReadingTip object.
      */
     public ReadingTip getTipFromUser(IO io);
+
+    /**
+     * Textual representation of ReadingTip.
+     * This text should be in a format that can be used for output printing.
+     * @param readingTip ReadingTip instance matching the class implementing TipUI.
+     * @return Textual representation of given readingTip.
+     */
+    public String toString(ReadingTip readingTip);
 }

@@ -53,7 +53,6 @@ public class ReadingTipDao extends Dao {
                     .append(e.getMessage())
                     .toString());
         }
-        
     }
     
     public List<ReadingTip> findAll() throws SQLException {
@@ -66,12 +65,7 @@ public class ReadingTipDao extends Dao {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                ReadingTip tip = new ReadingTip(Types.find(rs.getInt("type_id")));
-                tip.setId(rs.getInt("id"));
-                tip.setTitle(rs.getString("title"));
-                tip.setAuthor(rs.getString("author"));
-                tip.setIsbn(rs.getString("isbn"));
-                tip.setUrl(rs.getString("url"));
+                ReadingTip tip = tipFromResultSet(rs);
                 readingTips.add(tip);
             }
             
@@ -83,6 +77,45 @@ public class ReadingTipDao extends Dao {
                 .append(e.getMessage())
                 .toString());
         }
+    }
 
+    public ReadingTip findById(int id) throws SQLException {
+        try {
+            Connection conn = db.connect();
+
+            String sql = "SELECT * FROM ReadingTip WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (!rs.next()) {
+                return null;
+            }
+
+            ReadingTip rt = tipFromResultSet(rs);
+            closeAll(rs, stmt, conn);
+            return rt;
+        } catch(SQLException e) {
+            throw new SQLException(new StringBuilder()
+                .append("Error getting reading tip.")
+                .append(e.getMessage())
+                .toString());
+        }
+    }
+
+    private ReadingTip tipFromResultSet(ResultSet rs) {
+        try {
+            ReadingTip tip = new ReadingTip(Types.find(rs.getInt("type_id")));
+            tip.setId(rs.getInt("id"));
+            tip.setTitle(rs.getString("title"));
+            tip.setAuthor(rs.getString("author"));
+            tip.setIsbn(rs.getString("isbn"));
+            tip.setUrl(rs.getString("url"));
+            return tip;
+        } catch (Exception e) {
+            System.out.println("*** ERROR creating ReadingTip from ResultSet.");
+            System.exit(1);
+        }
+        return null;
     }
 }

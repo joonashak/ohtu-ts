@@ -5,7 +5,6 @@
  */
 package ohtu.ts.ui;
 
-import java.util.List;
 import ohtu.ts.domain.ReadingTip;
 import ohtu.ts.domain.Types;
 import ohtu.ts.io.IO;
@@ -43,9 +42,8 @@ public class TextUI {
                     break;
                 }
                 case LIST_ALL: {
-                    if (!commandList()) {
-                        // something wrong
-                    }
+                    ListUI listUi = new ListUI(io, terminal);
+                    listUi.show();
                     break;
                 }
                 case QUIT: {
@@ -80,27 +78,4 @@ public class TextUI {
         io.print("Lukuvinkki lisätty!");
         return true;
     }
-
-    private boolean commandList() {
-        List<ReadingTip> tips = rtService.listTips();
-        if (tips.isEmpty()) {
-            io.print("Lukuvinkkejä ei ole vielä lisätty.");
-            return true;
-        }
-        int[] terminalDims = null;
-        try {
-            terminalDims = terminal.getCommandLineDimensions();
-        } catch (Exception ex) {
-        }
-        assert terminalDims != null : "Terminal dims not initialized";
-        Table table = new Table(terminalDims[0], terminalDims[1]);
-        table.setHeaders("Id", "Title", "Type");
-        table.setColumnWidths(terminalDims[0] / 3, terminalDims[0] / 3, terminalDims[0] / 3);
-        for (ReadingTip tip : tips) {
-            table.addRow(tip.getId().toString(), tip.getTitle(), tip.getType().getName());
-        }
-        io.print(table.toString());
-        return true;
-    }
-
 }

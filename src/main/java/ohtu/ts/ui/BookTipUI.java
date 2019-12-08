@@ -14,4 +14,14 @@ public class BookTipUI implements TipUI {
                 io.readLine("ISBN: ")
         );
     }
+
+    @Override
+    public String toString(ReadingTip rt) {
+        return new StringBuilder()
+            .append("Tyyppi: Kirja, ")
+            .append(String.format("Otsikko: %s, ", rt.getTitle()))
+            .append(String.format("Kirjoittaja: %s, ", rt.getAuthor()))
+            .append(String.format("ISBN: %s", rt.getIsbn()))
+            .toString();
+    }
 }

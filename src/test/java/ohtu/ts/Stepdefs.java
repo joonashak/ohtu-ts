@@ -70,18 +70,20 @@ public class Stepdefs {
 
     @Then("system will respond with a list that contains at least the titles {string} {string}")
     public void systemWillRespondWithAListThatContainsAtLeastTheTitles(String string, String string2) {
+        commands.add("");
         commands.add("3");
         ui.run();
-        String printout = io.getOutputs().get(io.lastOutputIndex() - 1);
+        String printout = io.getOutputs().get(io.lastOutputIndex() - 2);
         assertThat(printout, containsString(string2));
         assertThat(printout, containsString(string));
     }
     
     @Then("system will respond with a list that contains the type {string}")
     public void systemWillRespondWithAListThatContainsTheType(String string) {
+        commands.add("");
         commands.add("3");
         ui.run();
-        String printout = io.getOutputs().get(io.lastOutputIndex() - 1);
+        String printout = io.getOutputs().get(io.lastOutputIndex() - 2);
         assertThat(printout, containsString(string));
 
     }
