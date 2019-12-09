@@ -29,7 +29,7 @@ public class StubIO implements IO {
     }
 
     @Override
-    public String readLine(String text) {
+    public String readOneLine(String text) {
         print(text);
         if (i < inputs.size()) {
             return inputs.get(i++);

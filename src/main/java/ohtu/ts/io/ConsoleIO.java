@@ -23,7 +23,7 @@ public class ConsoleIO implements IO {
     }
 
     @Override
-    public String readLine(String text) {
+    public String readOneLine(String text) {
         print(text);
         return scanner.nextLine();
     }

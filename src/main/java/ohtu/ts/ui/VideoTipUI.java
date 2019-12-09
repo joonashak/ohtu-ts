@@ -7,6 +7,6 @@ import ohtu.ts.io.IO;
 public class VideoTipUI implements TipUI {
     @Override
     public ReadingTip getTipFromUser(IO io) {
-        return new Video(io.readLine("Otsikko: "), io.readLine("URL: "));
+        return new Video(io.readOneLine("Otsikko: "), io.readOneLine("URL: "));
     }
 }

@@ -9,9 +9,9 @@ public class BookTipUI implements TipUI {
     @Override
     public ReadingTip getTipFromUser(IO io) {
         return new Book(
-                io.readLine("Otsikko: "),
-                io.readLine("Kirjoittaja: "),
-                io.readLine("ISBN: ")
+                io.readOneLine("Otsikko: "),
+                io.readOneLine("Kirjoittaja: "),
+                io.readOneLine("ISBN: ")
         );
     }
 }
