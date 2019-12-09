@@ -57,7 +57,14 @@ public class Stepdefs {
         commands.add(title);
         commands.add(url);
     }
-
+    
+    @When("blog title {string}, author {string} and url {string} are given")
+    public void titleAuthorAndUrlAreGiven(String title, String author, String url) {
+        commands.add(title);
+        commands.add(author);
+        commands.add(url);
+    }
+    
     @Then("system will respond with {string}")
     public void systemWillRespondWithLukuvinkkiLisätty(String string) {
         commands.add("3");
