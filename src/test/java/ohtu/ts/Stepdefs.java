@@ -26,13 +26,15 @@ public class Stepdefs {
     private StubIO io;
     private ReadingTipService service;
     private TextUI ui;
-
+    
     @Before
     public void SetUp() {
         commands = new ArrayList<>();
         io = new StubIO(commands);
         service = new ReadingTipService();
         ui = new TextUI(io, service, new Terminal());
+        Database db = new Database();
+        db.migrate();
     }
 
     @Given("command {string} is selected")
@@ -57,7 +59,14 @@ public class Stepdefs {
         commands.add(title);
         commands.add(url);
     }
-
+    
+    @When("blog title {string}, author {string} and url {string} are given")
+    public void titleAuthorAndUrlAreGiven(String title, String author, String url) {
+        commands.add(title);
+        commands.add(author);
+        commands.add(url);
+    }
+    
     @Then("system will respond with {string}")
     public void systemWillRespondWithLukuvinkkiLisätty(String string) {
         commands.add("3");
