@@ -61,8 +61,8 @@ public class Browser {
         if (OS.contains("win")) {
             return;
         }
-        String[] browsers = {"links", "lynx", "firefox", "chrome", "chromium", "epiphany",
-            "mozilla", "konqueror", "netscape", "opera", "epiphany", "iceweasel"};
+        String[] browsers = {"firefox", "chrome", "chromium", "epiphany",
+            "mozilla", "konqueror", "netscape", "opera", "epiphany", "links2", "iceweasel"};
         ProcessBuilder pb = new ProcessBuilder();
         for (String browser : browsers) {
             pb.command("sh", "-c", browser + ' ' + url);
@@ -75,8 +75,10 @@ public class Browser {
     public void launch() {
         try {
             if (!tryRuntimeScriptingMethod()) {
-                // do something potentially dangerous
-                tryBrowsers();
+                if (!tryDesktopMethod()) {
+                    // do something potentially dangerous
+                    tryBrowsers();
+                }
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
