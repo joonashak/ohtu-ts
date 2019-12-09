@@ -6,7 +6,8 @@ package ohtu.ts.domain;
  */
 public enum Types {
     BOOK(1, "Kirja"),
-    VIDEO(2, "Video");
+    VIDEO(2, "Video"),
+    BLOG(3, "Blogi");
 
     // enum fields
     int id;

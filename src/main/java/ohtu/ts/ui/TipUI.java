@@ -39,6 +39,8 @@ public interface TipUI {
                 return new BookTipUI();
             case VIDEO:
                 return new VideoTipUI();
+            case BLOG:
+                return new BlogTipUI();
             default:
                 return null;
         }
