@@ -18,6 +18,7 @@ gradle test
 gradle jacocoTestReport
 ```
 
+
 ## Documentation
 
 [Sprint backlog](https://docs.google.com/spreadsheets/d/1Ac3qACtyknZ2TekVcMgAAftpzhx3A5oApzwwDwFgvnk/edit#gid=7)
