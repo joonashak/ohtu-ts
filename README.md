@@ -4,6 +4,20 @@
 [![codecov](https://codecov.io/gh/joonashak/ohtu-ts/branch/master/graph/badge.svg)](https://codecov.io/gh/joonashak/ohtu-ts)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ab2398877100ad796899/maintainability)](https://codeclimate.com/github/joonashak/ohtu-ts/maintainability)
 
+## Installation
+
+Database migrations must be run before the first time this app is used and if the schema has changed. (Yes, this is inconvenient, but the migration library in use doesn't really support terminal interfaces...)
+
+```bash
+gradle run --args=--migrate
+```
+
+JAR:
+
+```bash
+java -jar ohtu-ts.jar --migrate
+```
+
 ## Usage
 
 ### Run unit tests
