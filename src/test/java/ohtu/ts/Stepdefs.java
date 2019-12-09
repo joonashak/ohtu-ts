@@ -26,13 +26,15 @@ public class Stepdefs {
     private StubIO io;
     private ReadingTipService service;
     private TextUI ui;
-
+    
     @Before
     public void SetUp() {
         commands = new ArrayList<>();
         io = new StubIO(commands);
         service = new ReadingTipService();
         ui = new TextUI(io, service, new Terminal());
+        Database db = new Database();
+        db.migrate();
     }
 
     @Given("command {string} is selected")
