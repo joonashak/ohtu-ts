@@ -35,10 +35,6 @@ public class Database {
         // Create asset directory if necessary.
         File dir = new File(path);
         dir.mkdir();
-
-        // Run database migrations first.
-        Flyway fw = Flyway.configure().dataSource(connStr, null, null).load();
-        fw.migrate();
     }
 
     /**
@@ -66,5 +62,10 @@ public class Database {
     
     public File getDbFile() {
         return new File(dbfilePath);
+    }
+
+    public void migrate() {
+        Flyway fw = Flyway.configure().dataSource(connStr, null, null).load();
+        fw.migrate();
     }
 }
