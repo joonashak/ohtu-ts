@@ -22,8 +22,9 @@ public class BlogTipUI implements TipUI {
     public String toString(ReadingTip rt) {
         return new StringBuilder()
             .append(String.format("ID:  %s\n", rt.getId()))
-            .append("Tyyppi:  Video\n")
+            .append("Tyyppi:  Blogi\n")
             .append(String.format("Otsikko:  %s\n", rt.getTitle()))
+                .append(String.format("Kirjoittaja:  %s\n", rt.getAuthor()))
             .append(String.format("URL:  %s", rt.getUrl()))
             .toString();
     }
