@@ -88,6 +88,18 @@ public class Stepdefs {
 
     }
 
+    @Then("system will respond with book's information: title {string}, author {string} and ISBN {string}")
+    public void systemWillRespondWithBookSInformationTitleAuthorAndISBN(String string, String string2, String string3) {
+        commands.add("");
+        commands.add("");
+        commands.add("3");
+        ui.run();
+        String printout = io.getOutputs().get(io.lastOutputIndex() - 4);
+        assertThat(printout, containsString(string));
+        assertThat(printout, containsString(string2));
+        assertThat(printout, containsString(string3));
+    }
+
     @When("no filters have been set")
     public void noFiltersHaveBeenSet() {
         // nothing yet
