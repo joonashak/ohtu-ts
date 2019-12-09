@@ -115,4 +115,8 @@ public class Terminal {
             Integer.parseInt(lines[0].split(":")[1].trim()) - 1};
     }
 
+    public String getOS() {
+        return OS;
+    }
+
 }
