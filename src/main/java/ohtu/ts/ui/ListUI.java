@@ -67,8 +67,6 @@ public class ListUI {
                         + "syötä \"1\" ja sitten ENTER avataksesi urlin "
                         + "selaimella\n>> ");
                 if (Integer.parseInt(s) == 1) {
-                    System.out.println("helou");
-                    System.out.println(service.find(cmd).getUrl());
                     new Browser(service.find(cmd).getUrl(),
                             terminal).launch();
                 }
