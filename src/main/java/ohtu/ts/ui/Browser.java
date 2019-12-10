@@ -39,7 +39,7 @@ public class Browser {
             throws Exception {
         int retVal;
         if (OS.contains("win")) {
-            retVal = term.exec("rundll32 url.dll,FileProtocolHandler", url).waitFor();
+            retVal = term.exec("rundll32", "url.dll,FileProtocolHandler", url).waitFor();
         } else if (OS.contains("mac")) {
             retVal = term.exec("open", url).waitFor();
         } else if (OS.contains("nix") || OS.contains("nux")) {

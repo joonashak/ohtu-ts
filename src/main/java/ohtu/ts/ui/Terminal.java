@@ -114,7 +114,6 @@ public class Terminal {
         try {
             return pb.start();
         } catch (IOException ex) {
-            ex.printStackTrace();
             return null;
         }
     }
