@@ -59,17 +59,17 @@ public class ListUI {
                 DetailsUI dui = new DetailsUI(cmd);
                 io.print(dui.toString());
 
-                if (service.find(cmd).getType() != Types.VIDEO) {
-                    io.readLine("\n\nPaina ENTER palataksesi listaukseen\n ");
-                    continue;
-                }
-                String s = io.readLine("\n\nPaina ENTER palataksesi listaukseen tai "
+                if (service.find(cmd).getType() == Types.VIDEO || service.find(cmd).getType() == Types.BLOG) {
+                    String s = io.readLine("\n\nPaina ENTER palataksesi listaukseen tai "
                         + "syötä \"1\" ja sitten ENTER avataksesi urlin "
                         + "selaimella\n>> ");
                 if (Integer.parseInt(s) == 1) {
                     new Browser(service.find(cmd).getUrl(),
                             terminal).launch();
                 }
+                    continue;
+                }
+                io.readLine("\n\nPaina ENTER palataksesi listaukseen\n ");
             } catch (Exception e) {
                 io.print("\nLukuvinkkiä ei löytynyt, tarkasta ID:\n\n");
             }
