@@ -50,17 +50,11 @@ public class Terminal {
     public int[] getCommandLineDimensions()
             throws Exception {
         if (OS.contains("nux") || OS.contains("nix") || OS.contains("mac")) {
-            ProcessBuilder heightCommand
-                    = new ProcessBuilder("sh", "-c", "tput lines");
-            int height = parseCommandLineLinux(heightCommand);
-            ProcessBuilder widthCommand
-                    = new ProcessBuilder("sh", "-c", "tput cols");
-            int width = parseCommandLineLinux(widthCommand);
+            int height = parseCommandLineLinux(exec("sh", "-c", "tput lines"));
+            int width = parseCommandLineLinux(exec("sh", "-c", "tput cols"));
             return new int[]{width, height};
         } else if (OS.contains("win")) {
-            ProcessBuilder command
-                    = new ProcessBuilder("cmd.exe", "/c", "mode con|find \"n\"");
-            int[] dims = parseCommandLineWindows(command);
+            int[] dims = parseCommandLineWindows(exec("cmd.exe", "/c", "mode con|find \"n\""));
             return dims;
         } else {
             // os not determined, falling back to defaults:
@@ -75,48 +69,54 @@ public class Terminal {
      * @return dims
      * @throws Exception
      */
-    private int parseCommandLineLinux(ProcessBuilder procBuilder)
+    private int parseCommandLineLinux(Process process)
             throws Exception {
-        assert (!procBuilder.command().isEmpty()) : "Process command not initialized";
-        Process process = procBuilder.start();
-        BufferedReader reader
-                = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line = reader.readLine(); // expecting one line
-        int retVal = process.waitFor();
-        if (retVal != 0) {
-            throw new Exception("Abnormal command line");
+        assert (process != null) : "Process null";
+        String line;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+            line = reader.readLine(); // expecting one line
+            int retVal = process.waitFor();
+            if (retVal != 0) {
+                throw new Exception("Abnormal command line");
+            }
         }
-        reader.close();
         return Integer.parseInt(line);
     }
 
     /**
      * Windows-specific output parsing util method.
      *
-     * @deprecated experimental, in case user uses Windows
      * @param procBuilder
      * @return dims
      * @throws IOException
      */
-    @Deprecated
-    private int[] parseCommandLineWindows(ProcessBuilder procBuilder)
+    private int[] parseCommandLineWindows(Process process)
             throws Exception {
-        assert (!procBuilder.command().isEmpty()) : "Process command not initialized";
-        Process process = procBuilder.start();
-        BufferedReader reader
-                = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String[] lines = reader.lines().toArray(String[]::new); // expecting two lines
-        int retVal = process.waitFor();
-        if (retVal != 0) {
-            throw new Exception("Abnormal command line");
+        assert (process != null) : "Process null";
+        String[] lines;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+            lines = reader.lines().toArray(String[]::new); // expecting two lines
+            int retVal = process.waitFor();
+            if (retVal != 0) {
+                throw new Exception("Abnormal command line");
+            }
         }
-        reader.close();
         return new int[]{Integer.parseInt(lines[1].split(":")[1].trim()) - 1,
             Integer.parseInt(lines[0].split(":")[1].trim()) - 1};
     }
 
     public String getOS() {
         return OS;
+    }
+
+    public Process exec(String... cmd) {
+        ProcessBuilder pb = new ProcessBuilder(cmd);
+        try {
+            return pb.start();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
 }

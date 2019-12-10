@@ -6,7 +6,6 @@
 package ohtu.ts.ui;
 
 import java.awt.Desktop;
-import java.io.IOException;
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
 
@@ -18,12 +17,12 @@ public class Browser {
 
     private final String url;
     private final String OS;
-    private final Runtime rt;
+    private final Terminal term;
 
-    public Browser(String url, String os, Runtime rt) {
+    public Browser(String url, Terminal term) {
         this.url = url;
-        this.OS = os;
-        this.rt = rt;
+        this.OS = term.getOS();
+        this.term = term;
     }
 
     private boolean tryDesktopMethod()
@@ -40,33 +39,27 @@ public class Browser {
             throws Exception {
         int retVal;
         if (OS.contains("win")) {
-            retVal = rt.exec("rundll32 url.dll,FileProtocolHandler " + url).waitFor();
+            retVal = term.exec("rundll32 url.dll,FileProtocolHandler", url).waitFor();
         } else if (OS.contains("mac")) {
-            retVal = rt.exec("open " + url).waitFor();
+            retVal = term.exec("open", url).waitFor();
         } else if (OS.contains("nix") || OS.contains("nux")) {
-            /*
-            String display = System.getenv("DISPLAY");
-            if (display == null) {
-                return false;
-            }
-             */
-            retVal = rt.exec("xdg-open " + url).waitFor();
+            retVal = term.exec("xdg-open", url).waitFor();
         } else {
             return false;
         }
         return retVal == 0;
     }
 
-    private void tryBrowsers() throws IOException, InterruptedException {
+    private void tryBrowsers()
+            throws Exception {
         if (OS.contains("win")) {
             return;
         }
         String[] browsers = {"firefox", "chrome", "chromium", "epiphany",
             "mozilla", "konqueror", "netscape", "opera", "epiphany", "links2", "iceweasel"};
-        ProcessBuilder pb = new ProcessBuilder();
         for (String browser : browsers) {
-            pb.command("sh", "-c", browser + ' ' + url);
-            if (pb.start().waitFor(1000, TimeUnit.MILLISECONDS)) {
+            Process p = term.exec("sh", "-c", browser + ' ' + url);
+            if (p.waitFor(1000, TimeUnit.MILLISECONDS)) {
                 return;
             }
         }
@@ -81,7 +74,7 @@ public class Browser {
                 }
             }
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }
