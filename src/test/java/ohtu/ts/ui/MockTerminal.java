@@ -20,6 +20,14 @@ public class MockTerminal implements TerminalWrapper {
     private String OS;
     private List<String> commandsRun;
 
+    /**
+     * Mock a terminal for testing. Usage: constructor takes your os as a
+     * string, and you can see, for instance, whether the UI makes a correct
+     * {@code exec()} call by invoking {@code getCommandsRun()} afterwards.
+     *
+     * @param dimensions
+     * @param OS
+     */
     public MockTerminal(int[] dimensions, String OS) {
         this.dimensions = dimensions;
         this.OS = OS;

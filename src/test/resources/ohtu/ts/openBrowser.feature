@@ -8,4 +8,4 @@ Feature: As a user I want to be able to open my browser directly from the app
         And command "2" is selected
         And command "1" is selected
         And command "b" is selected
-        Then the correct command will be run in the terminal
+        Then the correct command will be run in the terminal on linux

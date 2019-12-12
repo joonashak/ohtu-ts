@@ -11,7 +11,6 @@ import ohtu.ts.db.Database;
 import ohtu.ts.io.StubIO;
 import ohtu.ts.services.ReadingTipService;
 import ohtu.ts.ui.MockTerminal;
-import ohtu.ts.ui.Terminal;
 import ohtu.ts.ui.TextUI;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -123,8 +122,8 @@ public class Stepdefs {
         commands.add(url);
     }
 
-    @Then("the correct command will be run in the terminal")
-    public void theCorrectCommandWillBeRunInTheTerminal() {
+    @Then("the correct command will be run in the terminal on linux")
+    public void theCorrectCommandWillBeRunInTheTerminalOnLinux() {
         commands.add("");
         commands.add("3");
         ui.run();
