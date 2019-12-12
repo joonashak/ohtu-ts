@@ -10,10 +10,10 @@ or if you have gradle installed on your system
 gradle run
 ```
 
-The program starts. Now, you can issue commands by following the on-screen instructions, typing them on the screen and pressing enter on your keyboard. Currently only adding reading tips and listing all of them are supported operations. Typing the command 
+The program starts. Now, you can issue commands by following the on-screen instructions, typing them on the screen and pressing enter on your keyboard. Currently adding reading tips (book/video/blog), listing all of them, viewing a single tip and opening a link into a browser are supported operations. Typing the command 
 
 ```bash
-lopeta
+3
 ```
 
 exits the program.
