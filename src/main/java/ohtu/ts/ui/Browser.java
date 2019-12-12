@@ -17,9 +17,9 @@ public class Browser {
 
     private final String url;
     private final String OS;
-    private final Terminal term;
+    private final TerminalWrapper term;
 
-    public Browser(String url, Terminal term) {
+    public Browser(String url, TerminalWrapper term) {
         this.url = url;
         this.OS = term.getOS();
         this.term = term;
@@ -37,17 +37,17 @@ public class Browser {
 
     private boolean tryRuntimeScriptingMethod()
             throws Exception {
-        int retVal;
+        Process p;
         if (OS.contains("win")) {
-            retVal = term.exec("rundll32", "url.dll,FileProtocolHandler", url).waitFor();
+            p = term.exec("rundll32", "url.dll,FileProtocolHandler", url);
         } else if (OS.contains("mac")) {
-            retVal = term.exec("open", url).waitFor();
+            p = term.exec("open", url);
         } else if (OS.contains("nix") || OS.contains("nux")) {
-            retVal = term.exec("xdg-open", url).waitFor();
+            p = term.exec("xdg-open", url);
         } else {
             return false;
         }
-        return retVal == 0;
+        return p == null ? false : p.waitFor() == 0;
     }
 
     private void tryBrowsers()
@@ -59,6 +59,9 @@ public class Browser {
             "mozilla", "konqueror", "netscape", "opera", "epiphany", "links2", "iceweasel"};
         for (String browser : browsers) {
             Process p = term.exec("sh", "-c", browser + ' ' + url);
+            if (p == null) {
+                continue;
+            }
             if (p.waitFor(1000, TimeUnit.MILLISECONDS)) {
                 return;
             }
@@ -74,7 +77,7 @@ public class Browser {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            // fail silently...
         }
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import ohtu.ts.db.Database;
 import ohtu.ts.io.StubIO;
 import ohtu.ts.services.ReadingTipService;
+import ohtu.ts.ui.MockTerminal;
 import ohtu.ts.ui.Terminal;
 import ohtu.ts.ui.TextUI;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -26,13 +27,15 @@ public class Stepdefs {
     private StubIO io;
     private ReadingTipService service;
     private TextUI ui;
-    
+    private MockTerminal terminal;
+
     @Before
     public void SetUp() {
         commands = new ArrayList<>();
         io = new StubIO(commands);
         service = new ReadingTipService();
-        ui = new TextUI(io, service, new Terminal());
+        terminal = new MockTerminal(new int[]{80, 24}, "nix");
+        ui = new TextUI(io, service, terminal);
         Database db = new Database();
         db.migrate();
     }
@@ -59,14 +62,14 @@ public class Stepdefs {
         commands.add(title);
         commands.add(url);
     }
-    
+
     @When("blog title {string}, author {string} and url {string} are given")
     public void titleAuthorAndUrlAreGiven(String title, String author, String url) {
         commands.add(title);
         commands.add(author);
         commands.add(url);
     }
-    
+
     @Then("system will respond with {string}")
     public void systemWillRespondWithLukuvinkkiLisätty(String string) {
         commands.add("3");
@@ -86,7 +89,7 @@ public class Stepdefs {
         assertThat(printout, containsString(string2));
         assertThat(printout, containsString(string));
     }
-    
+
     @Then("system will respond with a list that contains the type {string}")
     public void systemWillRespondWithAListThatContainsTheType(String string) {
         commands.add("");
@@ -112,6 +115,22 @@ public class Stepdefs {
     @When("no filters have been set")
     public void noFiltersHaveBeenSet() {
         // nothing yet
+    }
+
+    @Given("video title {string} and URL {string} are given")
+    public void videoTitleAndURLAreGiven(String title, String url) {
+        commands.add(title);
+        commands.add(url);
+    }
+
+    @Then("the correct command will be run in the terminal")
+    public void theCorrectCommandWillBeRunInTheTerminal() {
+        commands.add("");
+        commands.add("3");
+        ui.run();
+        List<String> cmd = terminal.getCommandsRun();
+        String commandRunLast = cmd.get(cmd.size() - 1);
+        assertThat(commandRunLast, is("xdg-open google.com"));
     }
 
     @After

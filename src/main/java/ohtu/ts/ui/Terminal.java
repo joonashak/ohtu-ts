@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
  *
  * @author Arttu Mykkänen <arttu.mykkanen@outlook.com>
  */
-public class Terminal {
+public class Terminal implements TerminalWrapper {
 
     private final String OS;
 
@@ -47,6 +47,7 @@ public class Terminal {
      * @return dimensions
      * @throws Exception
      */
+    @Override
     public int[] getCommandLineDimensions()
             throws Exception {
         if (OS.contains("nux") || OS.contains("nix") || OS.contains("mac")) {
@@ -105,10 +106,12 @@ public class Terminal {
             Integer.parseInt(lines[0].split(":")[1].trim()) - 1};
     }
 
+    @Override
     public String getOS() {
         return OS;
     }
 
+    @Override
     public Process exec(String... cmd) {
         ProcessBuilder pb = new ProcessBuilder(cmd);
         try {

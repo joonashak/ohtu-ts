@@ -18,9 +18,9 @@ public class TextUI {
 
     private final IO io;
     private final ReadingTipService rtService;
-    private final Terminal terminal;
+    private final TerminalWrapper terminal;
 
-    public TextUI(IO io, ReadingTipService rtService, Terminal term) {
+    public TextUI(IO io, ReadingTipService rtService, TerminalWrapper term) {
         this.io = io;
         this.rtService = rtService;
         this.terminal = term;

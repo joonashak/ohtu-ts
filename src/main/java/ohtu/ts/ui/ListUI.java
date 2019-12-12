@@ -20,7 +20,7 @@ public class ListUI {
     private List<ReadingTip> readingTips;
     private int[] terminalDims;
     private ReadingTipService service;
-    private Terminal terminal;
+    private TerminalWrapper terminal;
 
     /**
      * Initialize the browsing interface.
@@ -28,7 +28,7 @@ public class ListUI {
      * @param io input/output service.
      * @param terminal Terminal instance for list dimensions.
      */
-    public ListUI(IO io, Terminal terminal) {
+    public ListUI(IO io, TerminalWrapper terminal) {
         this.io = io;
         this.service = new ReadingTipService();
         this.readingTips = service.listTips();
@@ -64,9 +64,9 @@ public class ListUI {
                     continue;
                 }
                 String s = io.readLine("\n\nPaina ENTER palataksesi listaukseen tai "
-                        + "syötä \"1\" ja sitten ENTER avataksesi urlin "
+                        + "syötä \"b\" ja sitten ENTER avataksesi urlin "
                         + "selaimella\n>> ");
-                if (Integer.parseInt(s) == 1) {
+                if (s.equals("b")) {
                     new Browser(service.find(cmd).getUrl(),
                             terminal).launch();
                 }
