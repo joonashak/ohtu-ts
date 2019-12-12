@@ -27,7 +27,8 @@ public class ReadingTipDaoTest {
     public void setUp() throws SQLException {
 
         db = new Database();
-
+        db.migrate();
+        
         try {
             dao = new ReadingTipDao(db);
         } catch (SQLException e) {

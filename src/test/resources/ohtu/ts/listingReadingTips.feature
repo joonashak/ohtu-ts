@@ -11,4 +11,10 @@ Scenario: user can list all reading tips
     When command "2" is selected
     Then system will respond with a list that contains at least the titles "title1" "title2"
 
+Scenario: list view contains type for a reading tip
+    Given command "1" is selected
+    And type "1" is given
+    And book title "title", author "author" and ISBN "1234" are given
+    When command "2" is selected
+    Then system will respond with a list that contains the type "Kirja"
 

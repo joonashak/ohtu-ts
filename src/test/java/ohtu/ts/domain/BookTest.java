@@ -33,9 +33,4 @@ public class BookTest {
         assertEquals("978-232324234", book.getIsbn());
         assertEquals(book.getType(), Types.BOOK);
     }
-
-    @Test
-    public void bookToStringIsWorking() {
-        assertEquals(book.toString(), bookString);
-    }
 }

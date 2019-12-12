@@ -50,7 +50,7 @@ public class Table implements CommandLineFragment {
     public String[] getHeaders() {
         return this.headers;
     }
-    
+
     /**
      * Set fixed widths for each line in the table.
      *
@@ -63,11 +63,11 @@ public class Table implements CommandLineFragment {
         }
         this.columnWidths = widths;
     }
-    
+
     public int[] getColumnWidths() {
         return this.columnWidths;
     }
-    
+
     public void addRow(String... columnVals) {
         if (rows.size() > maxHeight) {
             // do something if necessary
@@ -80,7 +80,7 @@ public class Table implements CommandLineFragment {
         for (int i = 0; i < len; i++) {
             builder.append(' ');
         }
-        return s + builder.substring(s.length());
+        return s.length() < len ? s + builder.substring(s.length()) : s.substring(0, len - 4) + "... ";
     }
 
     private String formatRow(String[] row) {

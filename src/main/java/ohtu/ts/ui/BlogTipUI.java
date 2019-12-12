@@ -1,17 +1,20 @@
 package ohtu.ts.ui;
 
-import ohtu.ts.domain.Book;
+import ohtu.ts.domain.Blog;
 import ohtu.ts.domain.ReadingTip;
 import ohtu.ts.io.IO;
 
-public class BookTipUI implements TipUI {
-
+/**
+ *
+ * @author Joonas
+ */
+public class BlogTipUI implements TipUI {
     @Override
     public ReadingTip getTipFromUser(IO io) {
-        return new Book(
+        return new Blog(
                 io.readLine("Otsikko: "),
                 io.readLine("Kirjoittaja: "),
-                io.readLine("ISBN: ")
+                io.readLine("URL: ")
         );
     }
 
@@ -19,10 +22,10 @@ public class BookTipUI implements TipUI {
     public String toString(ReadingTip rt) {
         return new StringBuilder()
             .append(String.format("ID:  %s\n", rt.getId()))
-            .append("Tyyppi:  Kirja\n")
+            .append("Tyyppi:  Blogi\n")
             .append(String.format("Otsikko:  %s\n", rt.getTitle()))
-            .append(String.format("Kirjoittaja:  %s\n", rt.getAuthor()))
-            .append(String.format("ISBN:  %s", rt.getIsbn()))
+                .append(String.format("Kirjoittaja:  %s\n", rt.getAuthor()))
+            .append(String.format("URL:  %s", rt.getUrl()))
             .toString();
     }
 }

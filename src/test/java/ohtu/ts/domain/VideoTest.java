@@ -39,9 +39,4 @@ public class VideoTest {
         assertEquals("https://www.youtube.com/watch?v=eg5w2vYpGpo", video.getUrl());
         assertEquals(video.getType(), Types.VIDEO);
     }
-    
-    @Test
-    public void videoToStringIsWorking() {
-        assertEquals(video.toString(), videoString);
-    }
 }

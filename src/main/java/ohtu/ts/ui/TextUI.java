@@ -5,7 +5,6 @@
  */
 package ohtu.ts.ui;
 
-import java.util.List;
 import ohtu.ts.domain.ReadingTip;
 import ohtu.ts.domain.Types;
 import ohtu.ts.io.IO;
@@ -19,9 +18,9 @@ public class TextUI {
 
     private final IO io;
     private final ReadingTipService rtService;
-    private final Terminal terminal;
+    private final TerminalWrapper terminal;
 
-    public TextUI(IO io, ReadingTipService rtService, Terminal term) {
+    public TextUI(IO io, ReadingTipService rtService, TerminalWrapper term) {
         this.io = io;
         this.rtService = rtService;
         this.terminal = term;
@@ -43,9 +42,8 @@ public class TextUI {
                     break;
                 }
                 case LIST_ALL: {
-                    if (!commandList()) {
-                        // something wrong
-                    }
+                    ListUI listUi = new ListUI(io, terminal);
+                    listUi.show();
                     break;
                 }
                 case QUIT: {
@@ -63,44 +61,11 @@ public class TextUI {
         }
 
         // Select correct type of TipUI.
-        TipUI tipUi = null;
-        switch (type) {
-            case BOOK:
-                tipUi = new BookTipUI();
-                break;
-            case VIDEO:
-                tipUi = new VideoTipUI();
-                break;
-            default:
-                break;
-        }
+        TipUI tipUi = TipUI.selectTipUI(type);
 
         ReadingTip tip = tipUi.getTipFromUser(io);
         rtService.save(tip);
         io.print("Lukuvinkki lisätty!");
         return true;
     }
-
-    private boolean commandList() {
-        List<ReadingTip> tips = rtService.listTips();
-        if (tips.isEmpty()) {
-            io.print("Lukuvinkkejä ei ole vielä lisätty.");
-            return true;
-        }
-        int[] terminalDims = null;
-        try {
-            terminalDims = terminal.getCommandLineDimensions();
-        } catch (Exception ex) {
-        }
-        assert terminalDims != null : "Terminal dims not initialized";
-        Table table = new Table(terminalDims[0], terminalDims[1]);
-        table.setHeaders("Id", "Title");
-        table.setColumnWidths(terminalDims[0] / 2, terminalDims[0] / 2);
-        for (ReadingTip tip : tips) {
-            table.addRow(tip.getId().toString(), tip.getTitle());
-        }
-        io.print(table.toString());
-        return true;
-    }
-
 }
