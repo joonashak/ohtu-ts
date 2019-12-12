@@ -12,8 +12,8 @@ public class App {
 
     public static void main(String[] args) {
         /**
-         * If run with --migrate handle, run database migrations and quit.
-         * This is a quick fix to suppress Flyway logging output which would
+         * If run with --migrate handle, run database migrations and quit. This
+         * is a quick fix to suppress Flyway logging output which would
          * otherwise pollute the console continuosly.
          */
         if (Arrays.asList(args).contains("--migrate")) {
@@ -22,8 +22,9 @@ public class App {
             System.exit(0);
         }
 
-        Terminal t = new Terminal();
+        Terminal t
+                = new Terminal(System.getProperty("os.name").toLowerCase());
         // t.testMe();
-        new TextUI(new ConsoleIO(), new ReadingTipService(), new Terminal()).run();
+        new TextUI(new ConsoleIO(), new ReadingTipService(), t).run();
     }
 }

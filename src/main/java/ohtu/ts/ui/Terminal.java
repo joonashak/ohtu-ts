@@ -22,23 +22,8 @@ public class Terminal implements TerminalWrapper {
 
     private final String OS;
 
-    public Terminal() {
-        OS = System.getProperty("os.name").toLowerCase();
-    }
-
-    /**
-     * Testing method for manual debugging.
-     */
-    public void testMe() {
-        System.out.println(OS + ": ");
-        int[] dims = null;
-        try {
-            dims = getCommandLineDimensions();
-        } catch (Exception ex) {
-            // fail silently...
-            return;
-        }
-        System.out.println("width: " + dims[0] + " height: " + dims[1]);
+    public Terminal(String OS) {
+        this.OS = OS;
     }
 
     /**

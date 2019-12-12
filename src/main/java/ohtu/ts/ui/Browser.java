@@ -50,10 +50,10 @@ public class Browser {
         return p == null ? false : p.waitFor() == 0;
     }
 
-    private void tryBrowsers()
+    private boolean tryBrowsers()
             throws Exception {
         if (OS.contains("win")) {
-            return;
+            return false;
         }
         String[] browsers = {"firefox", "chrome", "chromium", "epiphany",
             "mozilla", "konqueror", "netscape", "opera", "epiphany", "links2", "iceweasel"};
@@ -63,21 +63,27 @@ public class Browser {
                 continue;
             }
             if (p.waitFor(1000, TimeUnit.MILLISECONDS)) {
-                return;
+                return true;
             }
         }
+        return false;
     }
 
-    public void launch() {
+    public boolean launch() {
         try {
             if (!tryRuntimeScriptingMethod()) {
                 if (!tryDesktopMethod()) {
                     // do something potentially dangerous
                     tryBrowsers();
+                } else {
+                    return true;
                 }
+            } else {
+                return true;
             }
         } catch (Exception e) {
             // fail silently...
         }
+        return false;
     }
 }
