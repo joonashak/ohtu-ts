@@ -59,13 +59,12 @@ public class ListUI {
                 DetailsUI dui = new DetailsUI(cmd);
                 io.print(dui.toString());
 
-                if (service.find(cmd).getType() != Types.VIDEO) {
+                if (service.find(cmd).getType() != Types.VIDEO && service.find(cmd).getType() != Types.BLOG) {
                     io.readLine("\n\nPaina ENTER palataksesi listaukseen\n ");
                     continue;
                 }
                 String s = io.readLine("\n\nPaina ENTER palataksesi listaukseen tai "
-                        + "syötä \"b\" ja sitten ENTER avataksesi urlin "
-                        + "selaimella\n>> ");
+                        + "syötä \"b\" ja sitten ENTER avataksesi urlin selaimella\n>> ");
                 if (s.equals("b")) {
                     new Browser(service.find(cmd).getUrl(),
                             terminal).launch();
