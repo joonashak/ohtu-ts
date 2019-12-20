@@ -39,3 +39,6 @@ gradle jacocoTestReport
 [User manual](docs/user_manual.md)
 
 [Definition of done](docs/definition_of_done.md)
+
+## Raport
+[Course raport](https://docs.google.com/document/d/1f2tpWt6j93Y3QFlxFU5uYJwoz97w6mu9JaoNEV8iOyk/edit#heading=h.ij4zqwxjnfdn)
